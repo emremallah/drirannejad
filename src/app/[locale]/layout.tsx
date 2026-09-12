@@ -1,0 +1,65 @@
+import type { Metadata } from "next";
+import { Vazirmatn } from "next/font/google";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { MobileChrome } from "@/components/MobileChrome";
+import { getDictionary } from "@/lib/dictionary";
+import { dirFor, isLocale } from "@/lib/i18n";
+
+const vazir = Vazirmatn({
+  subsets: ["arabic", "latin"],
+  variable: "--font-vazir",
+  display: "swap",
+});
+
+type LocaleLayoutProps = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
+export function generateStaticParams() {
+  return [{ locale: "fa" }, { locale: "en" }];
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  const t = getDictionary(locale);
+  return {
+    title: t.brand,
+    description: t.hero.lead,
+  };
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: LocaleLayoutProps) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+
+  const t = getDictionary(locale);
+
+  return (
+    <html
+      lang={locale}
+      dir={dirFor(locale)}
+      className={`${vazir.variable} h-full antialiased`}
+    >
+      <body className={`${vazir.className} flex min-h-full flex-col bg-bg text-ink`}>
+        <Suspense>
+          <Header locale={locale} t={t} />
+        </Suspense>
+        <main className="flex-1 pb-24 md:pb-0">{children}</main>
+        <Footer locale={locale} t={t} />
+        <MobileChrome locale={locale} t={t} />
+      </body>
+    </html>
+  );
+}
