@@ -1,5 +1,5 @@
 type TabIconProps = {
-  name: "home" | "courses" | "free" | "about" | "more";
+  name: "home" | "courses" | "free" | "about" | "more" | "tests";
   active?: boolean;
 };
 
@@ -79,6 +79,13 @@ export function TabIcon({ name, active }: TabIconProps) {
             strokeWidth={stroke}
             strokeLinecap="round"
           />
+        </>
+      ) : null}
+
+      {name === "tests" ? (
+        <>
+          <rect x="5" y="3.5" width="14" height="17" rx="2" stroke="currentColor" strokeWidth={stroke} />
+          <path d="M8 9h8M8 12.5h8M8 16h5" stroke={active ? "#fff" : "currentColor"} strokeWidth={stroke} strokeLinecap="round" />
         </>
       ) : null}
 

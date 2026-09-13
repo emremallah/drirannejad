@@ -1,40 +1,4 @@
-type LogoProps = {
-  className?: string;
-  size?: number;
-};
-
-export function LogoMark({ className, size = 36 }: LogoProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 64 64"
-      fill="none"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect width="64" height="64" rx="16" fill="#1763D6" />
-      <path
-        d="M24 42c8.5-2.2 14.8-8.2 16.8-16.6"
-        stroke="#fff"
-        strokeWidth="4.4"
-        strokeLinecap="round"
-      />
-      <path
-        d="M20.5 35.2c7.2-1.6 12.4-6.6 14.2-13.6"
-        stroke="#fff"
-        strokeWidth="4.4"
-        strokeLinecap="round"
-      />
-      <path
-        d="M17.2 28.6c5.6-1.1 9.6-5 11.1-10.4"
-        stroke="#fff"
-        strokeWidth="4.4"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
+import Image from "next/image";
 
 type BrandLogoProps = {
   name: string;
@@ -42,11 +6,27 @@ type BrandLogoProps = {
 };
 
 export function BrandLogo({ name, compact }: BrandLogoProps) {
+  const shortName = name
+    .replace("پروفسور ", "")
+    .replace("Prof. ", "")
+    .replace(" Polyclinic", "");
+
   return (
-    <span className="flex items-center gap-2.5">
-      <LogoMark size={compact ? 32 : 36} />
-      <span className={`font-extrabold leading-5 text-ink ${compact ? "max-w-40 truncate text-sm" : "text-sm"}`}>
-        {name}
+    <span className="flex min-w-0 items-center gap-2.5">
+      <Image
+        src="/brand/clinic-logo.jpg"
+        alt=""
+        width={compact ? 36 : 42}
+        height={compact ? 36 : 42}
+        className="size-9 shrink-0 rounded-lg bg-primary-ink object-cover md:size-[42px]"
+      />
+      <span
+        title={name}
+        className={`min-w-0 font-extrabold leading-5 text-ink ${
+          compact ? "text-[13px] sm:text-sm" : "text-sm"
+        }`}
+      >
+        <span className="block truncate">{compact ? shortName : name}</span>
       </span>
     </span>
   );

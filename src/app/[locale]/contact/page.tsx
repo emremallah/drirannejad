@@ -21,9 +21,9 @@ export default async function ContactPage({ params }: ContactPageProps) {
           <div>
             <p className="text-xs font-bold text-faint">{t.contact.phone}</p>
             {t.contact.phones.map((phone) => (
-              <p key={phone} className="mt-1 font-bold text-ink">
+              <a key={phone} href={`tel:${phone.replace(/\s/g, "")}`} className="mt-1 block font-bold text-ink hover:text-primary">
                 {phone}
-              </p>
+              </a>
             ))}
           </div>
           <div>

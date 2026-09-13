@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { Hooshay } from "@/components/Hooshay";
 import { MobileChrome } from "@/components/MobileChrome";
 import { getDictionary } from "@/lib/dictionary";
 import { dirFor, isLocale } from "@/lib/i18n";
@@ -53,11 +53,10 @@ export default async function LocaleLayout({
       className={`${vazir.variable} h-full antialiased`}
     >
       <body className={`${vazir.className} flex min-h-full flex-col bg-bg text-ink`}>
-        <Suspense>
-          <Header locale={locale} t={t} />
-        </Suspense>
-        <main className="flex-1 pb-24 md:pb-0">{children}</main>
+        <Header locale={locale} t={t} />
+        <main className="flex-1 pb-8 lg:pb-0">{children}</main>
         <Footer locale={locale} t={t} />
+        <Hooshay />
         <MobileChrome locale={locale} t={t} />
       </body>
     </html>

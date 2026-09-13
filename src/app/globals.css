@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f6f8fc;
+  --bg: #f4f7fc;
   --surface: #ffffff;
-  --surface-subtle: #eef3fa;
-  --border: #e2e8f0;
-  --text: #1b2430;
-  --muted: #536174;
-  --faint: #7b8798;
-  --primary: #1763d6;
-  --primary-hover: #1254b8;
-  --primary-ink: #0d3f8f;
-  --primary-soft: #e8f1fc;
+  --surface-subtle: #e8f1fb;
+  --border: #d5e2f2;
+  --text: #0b1f3a;
+  --muted: #4b5f78;
+  --faint: #7b8ba0;
+  --primary: #0b3d91;
+  --primary-hover: #082e6e;
+  --primary-ink: #082a64;
+  --primary-soft: #dce9fb;
+  --accent: #f26a21;
+  --accent-soft: #ffe8d8;
   --success: #0f7a5a;
-  --highlight: #d97706;
+  --highlight: #f26a21;
 }
 
 @theme inline {
@@ -28,40 +30,27 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-ink: var(--primary-ink);
   --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
   --color-success: var(--success);
   --color-highlight: var(--highlight);
   --font-sans: var(--font-vazir);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-vazir), sans-serif;
 }
-
-a,
-button {
-  -webkit-tap-highlight-color: transparent;
+a, button { -webkit-tap-highlight-color: transparent; }
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
-
-html {
-  -webkit-text-size-adjust: 100%;
-}
-
-.no-scrollbar {
-  scrollbar-width: none;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  body {
-    background: #f6f8fc;
-  }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+@media print {
+  header, footer, nav, .no-print { display: none !important; }
+  main { padding: 0 !important; }
 }

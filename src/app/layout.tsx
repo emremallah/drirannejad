@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "آکادمی دکتر ایران‌نژاد",
+  title: "پلی‌کلینیک فوق‌تخصصی هوش مصنوعی و کارآفرینی پروفسور ایران‌نژاد",
   description:
     "دوره‌های فن بیان، ارتباطات، هوش هیجانی و مهارت‌های رشد به فارسی و انگلیسی.",
   icons: {
-    icon: "/brand/logo.png",
-    apple: "/brand/logo.png",
+    icon: "/brand/clinic-logo.jpg",
+    apple: "/brand/clinic-logo.jpg",
   },
 };
 

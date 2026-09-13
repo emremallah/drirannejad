@@ -11,7 +11,7 @@ type MobileEnrollBarProps = {
 
 export function MobileEnrollBar({ course, locale, t }: MobileEnrollBarProps) {
   return (
-    <div className="fixed inset-x-0 bottom-[72px] z-30 border-t border-border bg-surface/95 px-4 py-3 backdrop-blur-md md:hidden">
+    <div className="fixed inset-x-0 bottom-[72px] z-30 border-t border-border bg-surface/95 px-4 py-3 backdrop-blur-md lg:hidden">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-[11px] text-faint">{t.course.tuition}</p>

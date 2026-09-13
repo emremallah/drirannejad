@@ -56,9 +56,11 @@ export default async function CoursesPage({
       <div className="mt-6 flex flex-wrap gap-2">
         {filters.map((filter) => {
           const active = (topic ?? "") === filter.key;
-          const href = filter.key
-            ? `${localePath(locale, "/courses")}?topic=${filter.key}`
-            : localePath(locale, "/courses");
+          const query = new URLSearchParams();
+          if (filter.key) query.set("topic", filter.key);
+          if (q) query.set("q", q);
+          const qs = query.toString();
+          const href = `${localePath(locale, "/courses")}${qs ? `?${qs}` : ""}`;
           return (
             <Link
               key={filter.key || "all"}

@@ -54,6 +54,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
           <p className="mt-4 max-w-3xl text-base leading-8 text-muted">
             {copy.description}
           </p>
+          <Link
+            href={localePath(locale, `/courses/${course.slug}/learn`)}
+            className="mt-5 inline-flex rounded-full bg-accent px-4 py-2 text-sm font-bold text-white"
+          >
+            ورود به جلسات مرحله‌ای
+          </Link>
 
           <dl className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
@@ -105,7 +111,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
         <aside
           id="enroll"
-          className="mb-28 h-fit scroll-mt-28 rounded-xl border border-border bg-surface p-5 lg:sticky lg:top-24 lg:mb-0"
+          className="mb-36 h-fit scroll-mt-28 rounded-xl border border-border bg-surface p-5 lg:sticky lg:top-24 lg:mb-0"
         >
           <p className="text-xs font-bold text-faint">{t.course.tuition}</p>
           <p className="mt-1 text-2xl font-extrabold text-ink">

@@ -16,7 +16,7 @@ export function CourseCard({ course, locale, compact }: CourseCardProps) {
   return (
     <article
       className={`overflow-hidden border border-border bg-surface shadow-[0_1px_2px_rgba(16,24,40,0.06)] ${
-        compact ? "min-w-[78%] snap-center rounded-3xl md:min-w-0" : "rounded-2xl md:rounded-[10px]"
+        compact ? "w-[min(18.5rem,82vw)] shrink-0 snap-start rounded-3xl md:w-auto md:min-w-0" : "rounded-2xl md:rounded-[10px]"
       }`}
     >
       <Link href={localePath(locale, `/courses/${course.slug}`)} className="block">

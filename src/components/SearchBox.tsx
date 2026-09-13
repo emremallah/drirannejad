@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { Dictionary } from "@/lib/dictionary";
 import { localePath } from "@/lib/i18n";
@@ -22,7 +22,8 @@ export function SearchBox({
   onSubmit,
 }: SearchBoxProps) {
   const router = useRouter();
-  const [value, setValue] = useState(defaultValue ?? "");
+  const searchParams = useSearchParams();
+  const [value, setValue] = useState(defaultValue ?? searchParams.get("q") ?? "");
 
   return (
     <form

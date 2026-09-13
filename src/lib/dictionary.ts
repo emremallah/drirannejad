@@ -1,7 +1,7 @@
 import type { Locale } from "./types";
 
 const fa = {
-  brand: "آکادمی دکتر ایران‌نژاد",
+  brand: "پلی‌کلینیک پروفسور ایران‌نژاد",
   brandShort: "آ",
   nav: {
     home: "خانه",
@@ -14,6 +14,7 @@ const fa = {
     about: "مدرس",
     contact: "تماس",
     more: "بیشتر",
+    menu: "منو",
     search: "جستجو",
     searchPlaceholder: "جستجوی دوره...",
   },
@@ -21,7 +22,8 @@ const fa = {
     home: "خانه",
     courses: "دوره‌ها",
     free: "رایگان",
-    about: "مدرس",
+    about: "پروفایل",
+    tests: "آزمون",
     more: "بیشتر",
   },
   actions: {
@@ -87,7 +89,7 @@ const fa = {
   },
   course: {
     instructor: "مدرس",
-    instructorName: "دکتر فرشته ایران‌نژاد",
+    instructorName: "دکتر اعظم ایران‌نژاد",
     duration: "مدت",
     format: "نحوه برگزاری",
     level: "سطح",
@@ -97,7 +99,7 @@ const fa = {
     enrollLead: "فرم را پر کنید تا جزئیات ثبت‌نام برایتان ارسال شود.",
   },
   about: {
-    title: "دکتر فرشته ایران‌نژاد",
+    title: "دکتر اعظم ایران‌نژاد",
     role: "مدرس تخصصی سخنرانی، فن بیان و مهارت‌های ارتباطی",
     p1: "او به‌عنوان مشاور و مربی سخنرانی در کنار کارآفرینان، مدیران ارشد و صاحبان کسب‌وکار کار می‌کند.",
     p2: "رسالت آکادمی، ایجاد تحول در سبک ارتباطی ماندگار است؛ با آموزش‌هایی که هم برای زندگی روزمره و هم برای جایگاه حرفه‌ای قابل استفاده‌اند.",
@@ -123,8 +125,8 @@ const fa = {
   },
   footer: {
     blurb:
-      "آموزش فن بیان، ارتباطات و مهارت‌های رشد؛ روشن، کاربردی و دو زبانه.",
-    rights: "تمامی حقوق برای آکادمی دکتر ایران‌نژاد محفوظ است.",
+      "از پیله تا پروانه شدن پیوسته ادامه بده. Keep Going",
+    rights: "تمامی حقوق برای پلی‌کلینیک فوق‌تخصصی هوش مصنوعی و کارآفرینی پروفسور ایران‌نژاد محفوظ است.",
   },
   faq: {
     title: "سوالات پرتکرار",
@@ -202,7 +204,7 @@ const fa = {
 };
 
 const en: typeof fa = {
-  brand: "Dr. Irannejad Academy",
+  brand: "Prof. Irannejad Polyclinic",
   brandShort: "A",
   nav: {
     home: "Home",
@@ -215,6 +217,7 @@ const en: typeof fa = {
     about: "Instructor",
     contact: "Contact",
     more: "More",
+    menu: "Menu",
     search: "Search",
     searchPlaceholder: "Search courses...",
   },
@@ -222,7 +225,8 @@ const en: typeof fa = {
     home: "Home",
     courses: "Courses",
     free: "Free",
-    about: "Instructor",
+    about: "Profile",
+    tests: "Tests",
     more: "More",
   },
   actions: {
@@ -288,7 +292,7 @@ const en: typeof fa = {
   },
   course: {
     instructor: "Instructor",
-    instructorName: "Dr. Fereshteh Irannejad",
+    instructorName: "Dr. Azam Irannejad",
     duration: "Duration",
     format: "Format",
     level: "Level",
@@ -298,7 +302,7 @@ const en: typeof fa = {
     enrollLead: "Fill in the form and we will send you the enrollment details.",
   },
   about: {
-    title: "Dr. Fereshteh Irannejad",
+    title: "Dr. Azam Irannejad",
     role: "Instructor of public speaking, expression, and communication skills",
     p1: "She coaches entrepreneurs, senior managers, and business owners on presence, speaking, and lasting communication.",
     p2: "The academy exists to change how people are heard — with training that works in daily life and in professional rooms.",
@@ -323,9 +327,8 @@ const en: typeof fa = {
       "Your request was received. We will contact you to complete enrollment.",
   },
   footer: {
-    blurb:
-      "Speaking, communication, and growth skills — taught in a clear bilingual classroom.",
-    rights: "All rights reserved by Dr. Irannejad Academy.",
+    blurb: "From cocoon to butterfly, keep going.",
+    rights: "All rights reserved by Prof. Irannejad AI & Entrepreneurship Polyclinic.",
   },
   faq: {
     title: "Frequently asked questions",
