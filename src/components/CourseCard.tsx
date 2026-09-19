@@ -28,7 +28,7 @@ export function CourseCard({ course, locale, compact }: CourseCardProps) {
             sizes="(max-width: 768px) 90vw, 33vw"
             className="object-cover"
           />
-          <span className="absolute bottom-3 start-3 rounded-full bg-white/92 px-2.5 py-1 text-xs font-bold text-primary-ink">
+          <span className="absolute bottom-3 start-3 rounded-full bg-surface/95 px-2.5 py-1 text-xs font-bold text-ink">
             {categoryLabel(course.category, locale)}
           </span>
         </div>

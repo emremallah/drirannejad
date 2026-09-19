@@ -61,7 +61,7 @@ export default function LearnPage() {
                   </span>
                 </div>
                 {open ? (
-                  <div className="relative mt-3 overflow-hidden rounded-xl bg-primary-ink p-8 text-center text-white">
+                  <div className="relative mt-3 overflow-hidden rounded-xl bg-scrim p-8 text-center text-white">
                     <p className="text-sm opacity-80">پخش امن جلسه {lesson.minutes} دقیقه‌ای</p>
                     <p className="pointer-events-none absolute inset-x-4 bottom-3 text-[11px] text-white/50">
                       {userId} · کپی و ذخیره ممنوع

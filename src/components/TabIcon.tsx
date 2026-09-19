@@ -33,7 +33,7 @@ export function TabIcon({ name, active }: TabIconProps) {
           />
           <path
             d="M12 7.4v10"
-            stroke={active ? "#fff" : "currentColor"}
+            stroke={active ? "var(--bg)" : "currentColor"}
             strokeWidth={stroke}
             strokeLinecap="round"
           />
@@ -56,7 +56,7 @@ export function TabIcon({ name, active }: TabIconProps) {
           />
           <path
             d="M12 7.6V20"
-            stroke={active ? "#fff" : "currentColor"}
+            stroke={active ? "var(--bg)" : "currentColor"}
             strokeWidth={stroke}
             strokeLinecap="round"
           />
@@ -85,7 +85,7 @@ export function TabIcon({ name, active }: TabIconProps) {
       {name === "tests" ? (
         <>
           <rect x="5" y="3.5" width="14" height="17" rx="2" stroke="currentColor" strokeWidth={stroke} />
-          <path d="M8 9h8M8 12.5h8M8 16h5" stroke={active ? "#fff" : "currentColor"} strokeWidth={stroke} strokeLinecap="round" />
+          <path d="M8 9h8M8 12.5h8M8 16h5" stroke={active ? "var(--bg)" : "currentColor"} strokeWidth={stroke} strokeLinecap="round" />
         </>
       ) : null}
 

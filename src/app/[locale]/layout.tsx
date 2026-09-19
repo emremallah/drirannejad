@@ -50,8 +50,16 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dirFor(locale)}
+      suppressHydrationWarning
       className={`${vazir.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("clinic-theme");if(t==="light")document.documentElement.classList.add("light")}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className={`${vazir.className} flex min-h-full flex-col bg-bg text-ink`}>
         <Header locale={locale} t={t} />
         <main className="flex-1 pb-8 lg:pb-0">{children}</main>

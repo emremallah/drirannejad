@@ -1,6 +1,27 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: dark;
+  --bg: #15274f;
+  --surface: #1c3563;
+  --surface-subtle: #234075;
+  --border: #3d5a88;
+  --text: #f3f6fb;
+  --muted: #c5d2e6;
+  --faint: #97aac4;
+  --primary: #3d7ef0;
+  --primary-hover: #5b93f6;
+  --primary-ink: #e8f1ff;
+  --primary-soft: #243e6e;
+  --accent: #f26a21;
+  --accent-soft: #4a2e22;
+  --success: #3ecf9a;
+  --highlight: #f26a21;
+  --scrim: #0d1b33;
+}
+
+html.light {
+  color-scheme: light;
   --bg: #f4f7fc;
   --surface: #ffffff;
   --surface-subtle: #e8f1fb;
@@ -16,6 +37,7 @@
   --accent-soft: #ffe8d8;
   --success: #0f7a5a;
   --highlight: #f26a21;
+  --scrim: #0d1b33;
 }
 
 @theme inline {
@@ -34,6 +56,7 @@
   --color-accent-soft: var(--accent-soft);
   --color-success: var(--success);
   --color-highlight: var(--highlight);
+  --color-scrim: var(--scrim);
   --font-sans: var(--font-vazir);
 }
 
@@ -47,6 +70,10 @@ a, button { -webkit-tap-highlight-color: transparent; }
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+}
+input, textarea, select {
+  color: var(--text);
+  background-color: var(--surface);
 }
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
