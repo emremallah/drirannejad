@@ -80,7 +80,11 @@ export function MobileMenu({ locale, t, open, loggedIn, onClose }: MobileMenuPro
                       key={link.href}
                       href={link.href}
                       onClick={onClose}
-                      className="rounded-xl bg-bg px-3.5 py-3 text-sm font-bold text-ink"
+                      className={
+                        link.href.includes("/earn")
+                          ? "rounded-xl bg-accent px-3.5 py-3 text-sm font-bold text-white"
+                          : "rounded-xl bg-bg px-3.5 py-3 text-sm font-bold text-ink"
+                      }
                     >
                       {link.label}
                     </Link>

@@ -98,7 +98,7 @@ export default async function HomePage({
             [
               [fa ? "آموزش رایگان" : "Free lessons", "/free"],
               [fa ? "هدایا" : "Gifts", "/gifts"],
-              [fa ? "طرح راحت پول دربیار" : "Referral wallet", "/account"],
+              [fa ? "طرح راحت پول دربیار" : "Referral wallet", "/earn"],
               [fa ? "فروشگاه زی‌رضا" : "Zi-Reza store", "/store"],
             ] as const
           ).map(([label, href]) => (

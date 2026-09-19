@@ -17,6 +17,8 @@ function copy(locale: Locale) {
         resume: "رزومه‌ساز آنلاین",
         resumeSubmit: "ارسال رزومه",
         gifts: "هدایا",
+        earn: "طرح راحت پول دربیار",
+        earnGroup: "درآمد",
         store: "فروشگاه زی‌رضا",
         collaborate: "همکاری با ما",
         dispatch: "اعزام نیرو",
@@ -48,6 +50,8 @@ function copy(locale: Locale) {
         resume: "Resume builder",
         resumeSubmit: "Submit resume",
         gifts: "Gifts",
+        earn: "Earn Easily plan",
+        earnGroup: "Earn",
         store: "Zi-Reza store",
         collaborate: "Work with us",
         dispatch: "Talent dispatch",
@@ -78,6 +82,10 @@ export function navGroups(locale: Locale) {
         { href: localePath(locale, "/tests"), label: t.tests },
         { href: localePath(locale, "/path"), label: t.path },
       ],
+    },
+    {
+      title: t.earnGroup,
+      links: [{ href: localePath(locale, "/earn"), label: t.earn }],
     },
     {
       title: t.services,

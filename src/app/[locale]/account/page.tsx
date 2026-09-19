@@ -20,12 +20,26 @@ type Me = {
   tests: { testSlug: string; score: number; summary: string; id: string }[];
 };
 
+type EarnPlanPreview = {
+  rewardPerReferral: number;
+};
+
 export default function AccountPage() {
   const params = useParams<{ locale: string }>();
   const locale: Locale = isLocale(params.locale) ? params.locale : "fa";
   const [me, setMe] = useState<Me | null>(null);
   const [status, setStatus] = useState<"loading" | "guest" | "ready">("loading");
   const [copied, setCopied] = useState(false);
+  const [reward, setReward] = useState(50000);
+
+  useEffect(() => {
+    fetch("/api/earn")
+      .then((response) => response.json())
+      .then((plan: EarnPlanPreview) => {
+        if (typeof plan?.rewardPerReferral === "number") setReward(plan.rewardPerReferral);
+      })
+      .catch(() => undefined);
+  }, []);
 
   useEffect(() => {
     const id = getUserId();
@@ -122,9 +136,17 @@ export default function AccountPage() {
             {locale === "fa" ? "کیف پول طرح راحت پول دربیار" : "Referral wallet"}
           </p>
           <p className="mt-1 text-2xl font-extrabold">{user.wallet.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")} {locale === "fa" ? "تومان" : "Toman"}</p>
+          <p className="mt-2 text-sm text-muted">
+            {locale === "fa"
+              ? `هر معرفی موفق ${reward.toLocaleString("fa-IR")} تومان به کیف پول اضافه می‌کند.`
+              : `Each successful referral adds ${reward.toLocaleString("en-US")} Toman.`}
+          </p>
           <p className="mt-2 text-sm">
             {locale === "fa" ? "کد معرفی شما:" : "Your referral code:"} <b>{user.referralCode}</b>
           </p>
+          <Link href={localePath(locale, "/earn")} className="mt-2 inline-block text-xs font-bold text-primary">
+            {locale === "fa" ? "جزئیات طرح راحت پول دربیار" : "See the Earn Easily plan"}
+          </Link>
           <p className="mt-1 break-all text-xs text-muted">{referralLink}</p>
           <button
             type="button"

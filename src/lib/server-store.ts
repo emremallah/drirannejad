@@ -1,6 +1,7 @@
 import { createHash, randomBytes, timingSafeEqual } from "crypto";
 import { promises as fs } from "fs";
 import path from "path";
+import { normalizeEarnPlan, type EarnPlan } from "./earn-plan";
 
 const file = path.join(process.cwd(), "data", "store.json");
 const SECRET = process.env.CLINIC_SECRET || "irannejad-clinic-verify-2026";
@@ -59,14 +60,27 @@ export type Store = {
   forms: FormRecord[];
   progress: Progress[];
   docs: IssuedDoc[];
+  earnPlan: EarnPlan;
 };
 
-const empty: Store = { users: [], tests: [], forms: [], progress: [], docs: [] };
+const empty: Store = {
+  users: [],
+  tests: [],
+  forms: [],
+  progress: [],
+  docs: [],
+  earnPlan: normalizeEarnPlan(),
+};
 
 async function readStore(): Promise<Store> {
   try {
     const raw = await fs.readFile(file, "utf8");
-    return { ...empty, ...JSON.parse(raw) };
+    const parsed = (raw.trim() ? JSON.parse(raw) : {}) as Partial<Store>;
+    return {
+      ...empty,
+      ...parsed,
+      earnPlan: normalizeEarnPlan(parsed.earnPlan),
+    };
   } catch {
     await fs.mkdir(path.dirname(file), { recursive: true });
     await fs.writeFile(file, JSON.stringify(empty, null, 2));
@@ -133,7 +147,7 @@ export async function registerUser(input: {
   };
   store.users.push(user);
   if (referrer) {
-    referrer.wallet += 50000;
+    referrer.wallet += store.earnPlan.rewardPerReferral;
   }
   const card: IssuedDoc = {
     id: randomBytes(6).toString("hex"),
@@ -235,6 +249,28 @@ export async function submitHomework(userId: string, courseSlug: string, note: s
   return row;
 }
 
+export async function getEarnPlan() {
+  const store = await readStore();
+  return store.earnPlan;
+}
+
+export async function saveEarnPlan(input: Partial<EarnPlan>) {
+  const store = await readStore();
+  store.earnPlan = normalizeEarnPlan({ ...store.earnPlan, ...input });
+  await writeStore(store);
+  return store.earnPlan;
+}
+
+export async function adjustWallet(userId: string, delta: number) {
+  const store = await readStore();
+  const user = store.users.find((item) => item.id === userId);
+  if (!user) throw new Error("کاربر پیدا نشد.");
+  const change = Number.isFinite(delta) ? Math.round(delta) : 0;
+  user.wallet = Math.max(0, user.wallet + change);
+  await writeStore(store);
+  return user.wallet;
+}
+
 export async function getAdmin() {
   const store = await readStore();
   return {
@@ -242,12 +278,14 @@ export async function getAdmin() {
     tests: store.tests,
     forms: store.forms,
     docs: store.docs,
+    earnPlan: store.earnPlan,
     referrals: store.users
       .filter((user) => user.referredBy)
       .map((user) => ({
         user: user.name,
         phone: user.phone,
         referredBy: user.referredBy,
+        wallet: user.wallet,
       })),
   };
 }

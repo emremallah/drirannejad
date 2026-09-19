@@ -37,7 +37,7 @@ export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
 
   return (
     <footer className="mt-auto border-t border-border bg-surface pb-24 lg:pb-0">
-      <div className="mx-auto hidden w-[min(1180px,calc(100%-32px))] gap-8 py-10 lg:grid lg:grid-cols-6">
+      <div className="mx-auto hidden w-[min(1180px,calc(100%-32px))] gap-8 py-10 lg:grid lg:grid-cols-7">
         <div>
           <Link href={localePath(locale)} className="inline-flex">
             <BrandLogo name={t.brand} />

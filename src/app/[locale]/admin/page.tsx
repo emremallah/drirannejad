@@ -1,6 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { EarnAdmin } from "@/components/EarnAdmin";
+import { normalizeEarnPlan, type EarnPlan } from "@/lib/earn-plan";
+
+type AdminUser = {
+  id: string;
+  name: string;
+  phone: string;
+  referralCode: string;
+  referredBy?: string;
+  wallet: number;
+};
 
 export default function AdminPage() {
   const [data, setData] = useState<Record<string, unknown> | null>(null);
@@ -16,10 +27,13 @@ export default function AdminPage() {
   const tests = (data.tests as { name: string; phone: string; testSlug: string; score: number }[]) ?? [];
   const referrals = (data.referrals as { user: string; phone: string; referredBy: string }[]) ?? [];
   const forms = (data.forms as { kind: string; data: Record<string, string> }[]) ?? [];
+  const users = (data.users as AdminUser[]) ?? [];
+  const earnPlan = normalizeEarnPlan(data.earnPlan as EarnPlan | undefined);
 
   return (
     <div className="mx-auto w-[min(1000px,calc(100%-32px))] py-8">
       <h1 className="text-3xl font-extrabold">پنل مرکز</h1>
+      <EarnAdmin initialPlan={earnPlan} users={users} />
       <section className="mt-6">
         <h2 className="font-extrabold">شرکت‌کنندگان آزمون</h2>
         <div className="mt-3 grid gap-2">
