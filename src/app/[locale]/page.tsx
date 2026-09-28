@@ -24,8 +24,8 @@ export default async function HomePage({
         <p className="text-[11px] font-bold text-accent md:text-xs">{clinicName}</p>
         <h1 className="mx-auto mt-2 max-w-4xl text-xl font-extrabold leading-9 md:text-3xl md:leading-12">
           {fa
-            ? "مخترع و مبتکر اکوسیستم آموزشی نوین مبتنی بر هوش پنج‌گانه در ایران و جهان"
-            : "Inventor of a five-intelligence education ecosystem in Iran and the world"}
+            ? "مبدع و مبتکر اکوسیستم آموزشی نوین ارائه‌دهنده متدولوژی مبتنی بر هوش پنج‌گانه در ایران و جهان"
+            : "Originator and innovator of a new educational ecosystem providing a five-intelligence methodology in Iran and the world"}
         </h1>
         <p className="mt-3 text-sm text-primary-ink">
           {sloganFa} · {sloganEn}

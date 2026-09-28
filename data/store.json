@@ -105,5 +105,16 @@
         "textEn": "One permanent link to track referrals"
       }
     ]
-  }
+  },
+  "courseRules": {
+    "penaltyBase": 5000,
+    "penaltyStep": 5000,
+    "penaltyCap": 50000,
+    "cancelFee": 1000000,
+    "sessionMinutes": 15,
+    "examQuestions": 5,
+    "passScore": 40,
+    "examAttempts": 2
+  },
+  "pledges": []
 }

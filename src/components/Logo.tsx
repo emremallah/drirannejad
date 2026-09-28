@@ -1,32 +1,36 @@
 import Image from "next/image";
+import type { Locale } from "@/lib/types";
 
 type BrandLogoProps = {
-  name: string;
+  locale: Locale;
   compact?: boolean;
 };
 
-export function BrandLogo({ name, compact }: BrandLogoProps) {
-  const shortName = name
-    .replace("پروفسور ", "")
-    .replace("Prof. ", "")
-    .replace(" Polyclinic", "");
+export function BrandLogo({ locale, compact }: BrandLogoProps) {
+  const fa = locale !== "en";
 
   return (
     <span className="flex min-w-0 items-center gap-2.5">
       <Image
-        src="/brand/clinic-logo.jpg"
+        src="/brand/clinic-mark.png"
         alt=""
-        width={compact ? 36 : 42}
-        height={compact ? 36 : 42}
-        className="size-9 shrink-0 rounded-lg bg-primary-ink object-cover md:size-[42px]"
+        width={1562}
+        height={1200}
+        quality={100}
+        priority
+        className={`shrink-0 object-contain drop-shadow-sm ${compact ? "h-10 w-auto" : "h-12 w-auto md:h-[3.35rem]"}`}
       />
       <span
-        title={name}
-        className={`min-w-0 font-extrabold leading-5 text-ink ${
-          compact ? "text-[13px] sm:text-sm" : "text-sm"
+        className={`min-w-0 leading-snug ${
+          compact ? "text-[10px] sm:text-[11px]" : "text-[11px] md:text-[13px]"
         }`}
       >
-        <span className="block truncate">{compact ? shortName : name}</span>
+        <span className="block font-extrabold text-accent">
+          {fa ? "پلی‌کلینیک تخصصی و فوق‌تخصصی" : "Specialized & superspecialized polyclinic"}
+        </span>
+        <span className="mt-0.5 block font-bold text-ink">
+          {fa ? "کارآفرینی پروفسور ایران‌نژاد (AI)" : "Entrepreneurship · Prof. Irannejad (AI)"}
+        </span>
       </span>
     </span>
   );

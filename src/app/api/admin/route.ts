@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { adjustWallet, getAdmin, saveEarnPlan } from "@/lib/server-store";
+import { adjustWallet, getAdmin, saveCourseRules, saveEarnPlan } from "@/lib/server-store";
+import { normalizeCourseRules, type CourseRules } from "@/lib/course-rules";
 import { normalizeEarnPlan, type EarnPlan } from "@/lib/earn-plan";
 
 export const dynamic = "force-dynamic";
@@ -12,6 +13,7 @@ export async function POST(request: Request) {
   const body = (await request.json()) as {
     action?: string;
     plan?: Partial<EarnPlan>;
+    rules?: Partial<CourseRules>;
     userId?: string;
     delta?: number;
   };
@@ -19,6 +21,11 @@ export async function POST(request: Request) {
   if (body.action === "saveEarnPlan") {
     const plan = await saveEarnPlan(normalizeEarnPlan(body.plan));
     return NextResponse.json({ ok: true, plan });
+  }
+
+  if (body.action === "saveCourseRules") {
+    const rules = await saveCourseRules(normalizeCourseRules(body.rules));
+    return NextResponse.json({ ok: true, rules });
   }
 
   if (body.action === "adjustWallet") {

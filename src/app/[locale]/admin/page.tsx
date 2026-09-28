@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { EarnAdmin } from "@/components/EarnAdmin";
+import { RulesAdmin } from "@/components/RulesAdmin";
+import { normalizeCourseRules, type CourseRules } from "@/lib/course-rules";
 import { normalizeEarnPlan, type EarnPlan } from "@/lib/earn-plan";
 
 type AdminUser = {
@@ -29,10 +31,13 @@ export default function AdminPage() {
   const forms = (data.forms as { kind: string; data: Record<string, string> }[]) ?? [];
   const users = (data.users as AdminUser[]) ?? [];
   const earnPlan = normalizeEarnPlan(data.earnPlan as EarnPlan | undefined);
+  const courseRules = normalizeCourseRules(data.courseRules as CourseRules | undefined);
+  const pledges = (data.pledges as { userId: string; courseSlug: string; acceptedAt: string }[]) ?? [];
 
   return (
     <div className="mx-auto w-[min(1000px,calc(100%-32px))] py-8">
       <h1 className="text-3xl font-extrabold">پنل مرکز</h1>
+      <RulesAdmin initialRules={courseRules} />
       <EarnAdmin initialPlan={earnPlan} users={users} />
       <section className="mt-6">
         <h2 className="font-extrabold">شرکت‌کنندگان آزمون</h2>
@@ -59,6 +64,23 @@ export default function AdminPage() {
             ))
           ) : (
             <p className="text-sm text-muted">هنوز معرفی ثبت نشده است.</p>
+          )}
+        </div>
+      </section>
+      <section className="mt-8">
+        <h2 className="font-extrabold">تعهدنامه‌های ثبت‌شده</h2>
+        <div className="mt-3 grid gap-2">
+          {pledges.length ? (
+            pledges.map((item) => {
+              const user = users.find((row) => row.id === item.userId);
+              return (
+                <p key={`${item.userId}-${item.courseSlug}`} className="rounded-xl bg-surface p-3 text-sm">
+                  {user?.name ?? item.userId} — {item.courseSlug} — {new Date(item.acceptedAt).toLocaleString("fa-IR")}
+                </p>
+              );
+            })
+          ) : (
+            <p className="text-sm text-muted">هنوز تعهدنامه‌ای ثبت نشده است.</p>
           )}
         </div>
       </section>

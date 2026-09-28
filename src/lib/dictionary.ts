@@ -1,7 +1,7 @@
 import type { Locale } from "./types";
 
 const fa = {
-  brand: "پلی‌کلینیک پروفسور ایران‌نژاد",
+  brand: "پلی‌کلینیک پروفسور ایران‌نژاد (AI)",
   brandShort: "آ",
   nav: {
     home: "خانه",
@@ -126,7 +126,7 @@ const fa = {
   footer: {
     blurb:
       "از پیله تا پروانه شدن پیوسته ادامه بده. Keep Going",
-    rights: "تمامی حقوق برای پلی‌کلینیک فوق‌تخصصی هوش مصنوعی و کارآفرینی پروفسور ایران‌نژاد محفوظ است.",
+    rights: "تمامی حقوق برای پلی‌کلینیک فوق‌تخصصی هوش مصنوعی و کارآفرینی پروفسور ایران‌نژاد (AI) محفوظ است.",
   },
   faq: {
     title: "سوالات پرتکرار",
@@ -204,7 +204,7 @@ const fa = {
 };
 
 const en: typeof fa = {
-  brand: "Prof. Irannejad Polyclinic",
+  brand: "Prof. Irannejad (AI) Polyclinic",
   brandShort: "A",
   nav: {
     home: "Home",
@@ -328,7 +328,7 @@ const en: typeof fa = {
   },
   footer: {
     blurb: "From cocoon to butterfly, keep going.",
-    rights: "All rights reserved by Prof. Irannejad AI & Entrepreneurship Polyclinic.",
+    rights: "All rights reserved by the Specialized Polyclinic of Artificial Intelligence & Entrepreneurship of Prof. Irannejad (AI).",
   },
   faq: {
     title: "Frequently asked questions",

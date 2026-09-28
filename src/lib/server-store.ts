@@ -1,6 +1,7 @@
 import { createHash, randomBytes, timingSafeEqual } from "crypto";
 import { promises as fs } from "fs";
 import path from "path";
+import { normalizeCourseRules, type CourseRules } from "./course-rules";
 import { normalizeEarnPlan, type EarnPlan } from "./earn-plan";
 
 const file = path.join(process.cwd(), "data", "store.json");
@@ -54,6 +55,13 @@ export type IssuedDoc = {
   createdAt: string;
 };
 
+export type Pledge = {
+  id: string;
+  userId: string;
+  courseSlug: string;
+  acceptedAt: string;
+};
+
 export type Store = {
   users: User[];
   tests: TestResult[];
@@ -61,6 +69,8 @@ export type Store = {
   progress: Progress[];
   docs: IssuedDoc[];
   earnPlan: EarnPlan;
+  courseRules: CourseRules;
+  pledges: Pledge[];
 };
 
 const empty: Store = {
@@ -70,6 +80,8 @@ const empty: Store = {
   progress: [],
   docs: [],
   earnPlan: normalizeEarnPlan(),
+  courseRules: normalizeCourseRules(),
+  pledges: [],
 };
 
 async function readStore(): Promise<Store> {
@@ -80,6 +92,8 @@ async function readStore(): Promise<Store> {
       ...empty,
       ...parsed,
       earnPlan: normalizeEarnPlan(parsed.earnPlan),
+      courseRules: normalizeCourseRules(parsed.courseRules),
+      pledges: Array.isArray(parsed.pledges) ? parsed.pledges : [],
     };
   } catch {
     await fs.mkdir(path.dirname(file), { recursive: true });
@@ -279,6 +293,8 @@ export async function getAdmin() {
     forms: store.forms,
     docs: store.docs,
     earnPlan: store.earnPlan,
+    courseRules: store.courseRules,
+    pledges: store.pledges,
     referrals: store.users
       .filter((user) => user.referredBy)
       .map((user) => ({
@@ -303,6 +319,38 @@ export async function userDocs(userId: string) {
 export async function userTests(userId: string) {
   const store = await readStore();
   return store.tests.filter((item) => item.userId === userId);
+}
+
+export async function getCourseRules() {
+  const store = await readStore();
+  return store.courseRules;
+}
+
+export async function saveCourseRules(input: Partial<CourseRules>) {
+  const store = await readStore();
+  store.courseRules = normalizeCourseRules({ ...store.courseRules, ...input });
+  await writeStore(store);
+  return store.courseRules;
+}
+
+export async function hasPledge(userId: string, courseSlug: string) {
+  const store = await readStore();
+  return store.pledges.some((row) => row.userId === userId && row.courseSlug === courseSlug);
+}
+
+export async function savePledge(userId: string, courseSlug: string) {
+  const store = await readStore();
+  const exists = store.pledges.find((row) => row.userId === userId && row.courseSlug === courseSlug);
+  if (exists) return exists;
+  const row: Pledge = {
+    id: randomBytes(6).toString("hex"),
+    userId,
+    courseSlug,
+    acceptedAt: new Date().toISOString(),
+  };
+  store.pledges.push(row);
+  await writeStore(store);
+  return row;
 }
 
 export async function attachTestToResume(testId: string) {

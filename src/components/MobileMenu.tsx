@@ -56,7 +56,7 @@ export function MobileMenu({ locale, t, open, loggedIn, onClose }: MobileMenuPro
       >
         <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
           <Link href={localePath(locale)} onClick={onClose} aria-label={t.brand}>
-            <BrandLogo name={t.brand} compact />
+            <BrandLogo locale={locale} compact />
           </Link>
           <button
             type="button"

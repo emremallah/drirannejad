@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CoursePledge } from "@/components/CoursePledge";
 import { getUserId } from "@/lib/auth-client";
 import { lessons } from "@/lib/content";
 import { getCourse } from "@/lib/courses";
@@ -15,17 +16,43 @@ export default function LearnPage() {
   const [unlocked, setUnlocked] = useState(1);
   const [note, setNote] = useState("");
   const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
+  const [pledged, setPledged] = useState<boolean | null>(null);
 
   useEffect(() => {
     const id = getUserId();
     setUserId(id);
-    if (!id) return;
-    fetch(`/api/progress?userId=${id}&course=${params.slug}`)
-      .then((response) => response.json())
-      .then((data) => setUnlocked(data.unlocked ?? 1));
+    if (!id) {
+      setPledged(false);
+      return;
+    }
+    Promise.all([
+      fetch(`/api/progress?userId=${id}&course=${params.slug}`).then((response) => response.json()),
+      fetch(`/api/pledge?userId=${id}&course=${params.slug}`).then((response) => response.json()),
+      fetch(`/api/me?id=${id}`).then((response) => response.json()),
+    ])
+      .then(([progress, pledge, me]) => {
+        setUnlocked(progress.unlocked ?? 1);
+        setPledged(Boolean(pledge.pledged));
+        setUserName(me?.user?.name ?? "");
+      })
+      .catch(() => setPledged(false));
   }, [params.slug]);
 
   if (!course) return <p className="p-8">دوره پیدا نشد.</p>;
+
+  if (userId && pledged === false) {
+    return (
+      <CoursePledge
+        locale={locale}
+        courseSlug={params.slug}
+        courseTitle={course[locale].title}
+        userId={userId}
+        userName={userName || (locale === "fa" ? "هنرجو" : "Student")}
+        onAccepted={() => setPledged(true)}
+      />
+    );
+  }
 
   return (
     <div className="mx-auto w-[min(860px,calc(100%-32px))] py-8" onContextMenu={(event) => event.preventDefault()}>
@@ -46,6 +73,8 @@ export default function LearnPage() {
           </Link>
           .
         </p>
+      ) : pledged === null ? (
+        <p className="mt-4 text-sm text-muted">{locale === "fa" ? "در حال بررسی تعهدنامه..." : "Checking your pledge..."}</p>
       ) : (
         <ol className="mt-6 grid gap-4">
           {items.map((lesson) => {

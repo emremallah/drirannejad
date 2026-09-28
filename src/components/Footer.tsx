@@ -40,7 +40,7 @@ export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
       <div className="mx-auto hidden w-[min(1180px,calc(100%-32px))] gap-8 py-10 lg:grid lg:grid-cols-7">
         <div>
           <Link href={localePath(locale)} className="inline-flex">
-            <BrandLogo name={t.brand} />
+            <BrandLogo locale={locale} />
           </Link>
           <p className="mt-3 text-sm leading-7 text-muted">{t.footer.blurb}</p>
         </div>

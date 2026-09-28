@@ -58,9 +58,9 @@ export function Header({ locale, t }: HeaderProps) {
         <span className="mx-1.5 text-white/40">·</span>
         <span>Keep Going</span>
       </div>
-      <div className="mx-auto hidden h-16 w-[min(1180px,calc(100%-32px))] items-center gap-5 lg:flex">
+      <div className="mx-auto hidden h-[4.75rem] w-[min(1180px,calc(100%-32px))] items-center gap-5 lg:flex">
         <Link href={localePath(locale)} className="shrink-0" aria-label={t.brand}>
-          <BrandLogo name={t.brand} />
+          <BrandLogo locale={locale} />
         </Link>
         <nav className="flex flex-1 items-center gap-0.5 text-[13px] font-semibold text-muted">
           {groups.map((group) => (
@@ -124,7 +124,7 @@ export function Header({ locale, t }: HeaderProps) {
         </div>
       </div>
 
-      <div className="mx-auto flex h-14 w-[min(1180px,calc(100%-24px))] items-center justify-between gap-2 lg:hidden">
+      <div className="mx-auto flex h-16 w-[min(1180px,calc(100%-24px))] items-center justify-between gap-2 lg:hidden">
         <div className="flex min-w-0 items-center gap-1">
           <button
             type="button"
@@ -149,7 +149,7 @@ export function Header({ locale, t }: HeaderProps) {
             )}
           </button>
           <Link href={localePath(locale)} className="min-w-0" aria-label={t.brand}>
-            <BrandLogo name={t.brand} compact />
+            <BrandLogo locale={locale} compact />
           </Link>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">

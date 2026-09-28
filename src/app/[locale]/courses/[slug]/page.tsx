@@ -60,6 +60,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
           >
             ورود به جلسات مرحله‌ای
           </Link>
+          <p className="mt-2 text-xs leading-6 text-muted">
+            قبل از شروع رسمی جلسات، تعهدنامه قوانین، انصراف و جریمه نمایش داده می‌شود.
+          </p>
 
           <dl className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
