@@ -56,7 +56,7 @@ export function Header({ locale, t }: HeaderProps) {
         <p className="text-[12px] font-extrabold md:text-sm" style={{ color: "#7FD4F9" }}>
           {locale === "fa" ? "از پیله تا پروانه، پیوسته ادامه بده" : "From cocoon to butterfly, keep going"}
         </p>
-        <p className="keep-going mt-0.5 text-[18px] text-white md:text-[22px]">Keep Going</p>
+        <p className="keep-going mt-0.5 text-[13px] text-white md:text-[15px]">Keep Going</p>
       </div>
       <div className="mx-auto hidden h-[4.75rem] w-[min(1180px,calc(100%-32px))] items-center gap-5 lg:flex">
         <Link href={localePath(locale)} className="shrink-0" aria-label={t.brand}>

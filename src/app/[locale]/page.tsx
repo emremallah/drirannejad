@@ -29,7 +29,7 @@ export default async function HomePage({
         <p className="mt-3 text-base font-extrabold md:text-lg" style={{ color: "#7FD4F9" }}>
           {fa ? sloganFa : "From cocoon to butterfly, keep going"}
         </p>
-        <p className="keep-going mt-2 text-[28px] leading-none text-white md:text-[34px]">{sloganEn}</p>
+        <p className="keep-going mt-2 text-[18px] leading-none text-white md:text-[22px]">{sloganEn}</p>
       </section>
 
       <div className="mx-auto w-[min(1120px,calc(100%-32px))]">
