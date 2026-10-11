@@ -40,6 +40,18 @@
   --font-sans: var(--font-vazir);
 }
 
+.keep-going {
+  font-family: var(--font-script), cursive;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.brand-lockup {
+  text-align: justify;
+  text-align-last: justify;
+  text-justify: inter-word;
+}
+
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);

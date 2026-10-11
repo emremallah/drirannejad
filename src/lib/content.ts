@@ -4,7 +4,7 @@ export const clinicName =
 export const clinicBanner =
   "آکادمی پلی‌کلینیک فوق‌تخصصی هوش مصنوعی و کارآفرینی پروفسور ایران‌نژاد (AI)؛ مبدع و مبتکر اکوسیستم آموزشی نوین ارائه‌دهنده متدولوژی مبتنی بر هوش پنج‌گانه در ایران و جهان";
 
-export const sloganFa = "از پیله تا پروانه شدن پیوسته ادامه بده";
+export const sloganFa = "از پیله تا پروانه، پیوسته ادامه بده";
 export const sloganEn = "Keep Going";
 
 export const licenses = [

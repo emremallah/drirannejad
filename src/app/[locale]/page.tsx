@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CourseCard } from "@/components/CourseCard";
-import { clinicBanner, clinicName, licenses, sisterSites, sloganEn, sloganFa } from "@/lib/content";
+import { clinicBanner, licenses, sisterSites, sloganEn } from "@/lib/content";
 import { courses, featuredCourses } from "@/lib/courses";
 import { getDictionary } from "@/lib/dictionary";
 import { isLocale, localePath } from "@/lib/i18n";
@@ -21,15 +21,12 @@ export default async function HomePage({
   return (
     <div>
       <section className="bg-surface px-4 py-7 text-center md:py-9">
-        <p className="text-[11px] font-bold text-accent md:text-xs">{clinicName}</p>
-        <h1 className="mx-auto mt-2 max-w-4xl text-xl font-extrabold leading-9 md:text-3xl md:leading-12">
+        <h1 className="mx-auto max-w-4xl text-xl font-extrabold leading-9 md:text-3xl md:leading-12" style={{ color: "#7FD4F9" }}>
           {fa
             ? "مبدع و مبتکر اکوسیستم آموزشی نوین ارائه‌دهنده متدولوژی مبتنی بر هوش پنج‌گانه در ایران و جهان"
             : "Originator and innovator of a new educational ecosystem providing a five-intelligence methodology in Iran and the world"}
         </h1>
-        <p className="mt-3 text-sm text-primary-ink">
-          {sloganFa} · {sloganEn}
-        </p>
+        <p className="keep-going mt-3 text-[28px] leading-none text-white md:text-[34px]">{sloganEn}</p>
       </section>
 
       <div className="mx-auto w-[min(1120px,calc(100%-32px))]">

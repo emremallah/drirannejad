@@ -52,9 +52,11 @@ export function Header({ locale, t }: HeaderProps) {
   return (
     <>
     <header className={`sticky top-0 border-b border-border bg-surface/95 backdrop-blur-md ${menuOpen ? "z-[60]" : "z-30"}`}>
-      <div className="bg-scrim px-3 py-1.5 text-center text-[11px] font-bold leading-4 text-white md:text-xs md:leading-5">
-        <p className="text-orange-200">{locale === "fa" ? "از پیله تا پروانه" : "From cocoon to butterfly"}</p>
-        <p className="mt-0.5 text-white">Keep Going</p>
+      <div className="bg-scrim px-3 py-2 text-center leading-tight">
+        <p className="text-[12px] font-extrabold md:text-sm" style={{ color: "#7FD4F9" }}>
+          {locale === "fa" ? "از پیله تا پروانه، پیوسته ادامه بده" : "From cocoon to butterfly, keep going"}
+        </p>
+        <p className="keep-going mt-0.5 text-[18px] text-white md:text-[22px]">Keep Going</p>
       </div>
       <div className="mx-auto hidden h-[4.75rem] w-[min(1180px,calc(100%-32px))] items-center gap-5 lg:flex">
         <Link href={localePath(locale)} className="shrink-0" aria-label={t.brand}>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Vazirmatn } from "next/font/google";
+import { Great_Vibes, Vazirmatn } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -11,6 +11,13 @@ import { dirFor, isLocale } from "@/lib/i18n";
 const vazir = Vazirmatn({
   subsets: ["arabic", "latin"],
   variable: "--font-vazir",
+  display: "swap",
+});
+
+const keepGoing = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-script",
   display: "swap",
 });
 
@@ -51,7 +58,7 @@ export default async function LocaleLayout({
       lang={locale}
       dir={dirFor(locale)}
       suppressHydrationWarning
-      className={`${vazir.variable} h-full antialiased`}
+      className={`${vazir.variable} ${keepGoing.variable} h-full antialiased`}
     >
       <body className={`${vazir.className} flex min-h-full flex-col bg-bg text-ink`}>
         <Header locale={locale} t={t} />
