@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Dariush";
+  src:
+    local("Dariush"),
+    local("Dariush Font"),
+    url("/fonts/Dariush.woff2") format("woff2"),
+    url("/fonts/Dariush.woff") format("woff"),
+    url("/fonts/Dariush.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   --bg: #15274f;
@@ -37,7 +50,7 @@
   --color-success: var(--success);
   --color-highlight: var(--highlight);
   --color-scrim: var(--scrim);
-  --font-sans: var(--font-vazir);
+  --font-sans: "Dariush", var(--font-vazir);
 }
 
 .keep-going {
@@ -47,6 +60,7 @@
 }
 
 .brand-lockup {
+  font-family: var(--font-vazir), sans-serif;
   text-align: justify;
   text-align-last: justify;
   text-justify: inter-word;
@@ -56,7 +70,7 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-vazir), sans-serif;
+  font-family: "Dariush", var(--font-vazir), sans-serif;
 }
 a, button { -webkit-tap-highlight-color: transparent; }
 :focus-visible {

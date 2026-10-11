@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CourseCard } from "@/components/CourseCard";
-import { clinicBanner, licenses, sisterSites, sloganEn } from "@/lib/content";
+import { clinicBanner, licenses, sisterSites, sloganEn, sloganFa } from "@/lib/content";
 import { courses, featuredCourses } from "@/lib/courses";
 import { getDictionary } from "@/lib/dictionary";
 import { isLocale, localePath } from "@/lib/i18n";
@@ -26,7 +26,10 @@ export default async function HomePage({
             ? "مبدع و مبتکر اکوسیستم آموزشی نوین ارائه‌دهنده متدولوژی مبتنی بر هوش پنج‌گانه در ایران و جهان"
             : "Originator and innovator of a new educational ecosystem providing a five-intelligence methodology in Iran and the world"}
         </h1>
-        <p className="keep-going mt-3 text-[28px] leading-none text-white md:text-[34px]">{sloganEn}</p>
+        <p className="mt-3 text-base font-extrabold md:text-lg" style={{ color: "#7FD4F9" }}>
+          {fa ? sloganFa : "From cocoon to butterfly, keep going"}
+        </p>
+        <p className="keep-going mt-2 text-[28px] leading-none text-white md:text-[34px]">{sloganEn}</p>
       </section>
 
       <div className="mx-auto w-[min(1120px,calc(100%-32px))]">
