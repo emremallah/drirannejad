@@ -8,7 +8,6 @@ import type { Dictionary } from "@/lib/dictionary";
 import { localePath } from "@/lib/i18n";
 import { navGroups } from "@/lib/nav";
 import type { Locale } from "@/lib/types";
-import { ThemeToggle } from "./ThemeToggle";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { BrandLogo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
@@ -53,10 +52,9 @@ export function Header({ locale, t }: HeaderProps) {
   return (
     <>
     <header className={`sticky top-0 border-b border-border bg-surface/95 backdrop-blur-md ${menuOpen ? "z-[60]" : "z-30"}`}>
-      <div className="bg-scrim px-3 py-1.5 text-center text-[11px] font-bold leading-5 text-white md:text-xs">
-        <span className="text-orange-200">{locale === "fa" ? "از پیله تا پروانه شدن پیوسته ادامه بده" : "From cocoon to butterfly"}</span>
-        <span className="mx-1.5 text-white/40">·</span>
-        <span>Keep Going</span>
+      <div className="bg-scrim px-3 py-1.5 text-center text-[11px] font-bold leading-4 text-white md:text-xs md:leading-5">
+        <p className="text-orange-200">{locale === "fa" ? "از پیله تا پروانه" : "From cocoon to butterfly"}</p>
+        <p className="mt-0.5 text-white">Keep Going</p>
       </div>
       <div className="mx-auto hidden h-[4.75rem] w-[min(1180px,calc(100%-32px))] items-center gap-5 lg:flex">
         <Link href={localePath(locale)} className="shrink-0" aria-label={t.brand}>
@@ -94,7 +92,6 @@ export function Header({ locale, t }: HeaderProps) {
           </Suspense>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <ThemeToggle locale={locale} />
           <Suspense>
             <LocaleSwitch locale={locale} />
           </Suspense>
@@ -153,7 +150,6 @@ export function Header({ locale, t }: HeaderProps) {
           </Link>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
-          <ThemeToggle locale={locale} compact />
           <Suspense>
             <LocaleSwitch locale={locale} compact />
           </Suspense>

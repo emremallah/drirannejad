@@ -35,9 +35,10 @@ export default async function HomePage({
       <div className="mx-auto w-[min(1120px,calc(100%-32px))]">
         <section className="grid items-center gap-8 py-10 md:grid-cols-[1.15fr_0.85fr]">
           <div>
-            <p className="text-sm font-bold text-accent">{t.brand}</p>
-            <h2 className="mt-2 text-3xl font-extrabold leading-snug text-ink md:text-4xl">
-              {fa ? "از پیله تا پروانه شدن" : "From cocoon to butterfly"}
+            <h2 className="text-3xl font-extrabold leading-snug text-ink md:text-4xl">
+              {fa
+                ? "پلی‌کلینیک تخصصی و فوق‌تخصصی کارآفرینی و هوش مصنوعی دکتر ایران‌نژاد"
+                : "Specialized & superspecialized polyclinic of entrepreneurship and AI, Dr. Irannejad"}
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-7 text-muted md:text-base">
               {fa
@@ -63,7 +64,7 @@ export default async function HomePage({
             width={420}
             height={420}
             priority
-            className="mx-auto w-full max-w-[280px] rounded-full border-4 border-accent object-cover md:max-w-[320px]"
+            className="mx-auto w-full max-w-[280px] rounded-full object-cover md:max-w-[320px]"
           />
         </section>
 
