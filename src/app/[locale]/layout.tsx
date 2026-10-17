@@ -39,8 +39,11 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {};
   const t = getDictionary(locale);
   return {
-    title: t.brand,
+    title: `10788753 | ${t.brand}`,
     description: t.hero.lead,
+    other: {
+      enamad: "10788753",
+    },
   };
 }
 
@@ -60,6 +63,9 @@ export default async function LocaleLayout({
       suppressHydrationWarning
       className={`${vazir.variable} ${keepGoing.variable} h-full antialiased`}
     >
+      <head>
+        <meta name="enamad" content="10788753" />
+      </head>
       <body className="flex min-h-full flex-col bg-bg text-ink">
         <Header locale={locale} t={t} />
         <main className="flex-1 pb-8 lg:pb-0">{children}</main>
