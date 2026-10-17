@@ -4,13 +4,14 @@ import type { Locale } from "@/lib/types";
 type BrandLogoProps = {
   locale: Locale;
   compact?: boolean;
+  stacked?: boolean;
 };
 
-export function BrandLogo({ locale, compact }: BrandLogoProps) {
+export function BrandLogo({ locale, compact, stacked }: BrandLogoProps) {
   const fa = locale !== "en";
 
   return (
-    <span className="flex min-w-0 items-center gap-2.5">
+    <span className={`flex min-w-0 ${stacked ? "flex-col items-start gap-2" : "items-center gap-2.5"}`}>
       <Image
         src="/brand/clinic-mark.png"
         alt=""
@@ -21,9 +22,9 @@ export function BrandLogo({ locale, compact }: BrandLogoProps) {
         className={`shrink-0 object-contain drop-shadow-sm ${compact ? "h-10 w-auto" : "h-12 w-auto md:h-[3.35rem]"}`}
       />
       <span
-        className={`brand-lockup grid w-max max-w-full leading-5 ${
-          compact ? "text-[10px] sm:text-[11px]" : "text-[11px] md:text-[13px]"
-        }`}
+        className={`brand-lockup grid leading-5 ${
+          stacked ? "w-full" : "w-max max-w-full"
+        } ${compact ? "text-[10px] sm:text-[11px]" : "text-[11px] md:text-[13px]"}`}
       >
         <span className="font-extrabold text-accent">
           {fa ? "پلی‌کلینیک تخصصی و فوق‌تخصصی" : "Specialized & superspecialized polyclinic"}
