@@ -66,9 +66,9 @@ export const defaultEarnPlan: EarnPlan = {
   subtitleFa: "با معرفی دوست، پاداش نقدی و کمیسیون دوره بگیر",
   subtitleEn: "Share your code, earn cash rewards and course commissions",
   introFa:
-    "بعد از ثبت‌نام یک کد اختصاصی می‌گیرید. هر ثبت‌نام موفق با آن کد، پاداش را به کیف پول شما می‌نشاند و برای فروش دوره‌ها کمیسیون جداگانه محاسبه می‌شود.",
+    "بعد از ثبت‌نام یک کد اختصاصی می‌گیرید. هر ثبت‌نام موفق با آن کد، پاداش را در طرح راحت پول دربیار ثبت می‌کند و برای فروش دوره‌ها کمیسیون جداگانه محاسبه می‌شود.",
   introEn:
-    "After signup you get a personal code. Each successful signup with that code credits your wallet, and course sales pay a separate commission.",
+    "After signup you get a personal code. Each successful signup with that code is recorded in the Earn Easily plan, and course sales pay a separate commission.",
   rewardPerReferral: 50000,
   commissionMin: 10,
   commissionMax: 30,
@@ -77,8 +77,8 @@ export const defaultEarnPlan: EarnPlan = {
       id: "step-1",
       titleFa: "ثبت‌نام و دریافت کد",
       titleEn: "Sign up and get a code",
-      textFa: "حساب بسازید تا کارت عضویت و کد معرفی اختصاصی صادر شود.",
-      textEn: "Create an account to receive your membership card and referral code.",
+      textFa: "حساب بسازید تا کارت عضویت باشگاه کارآفرینی و کد معرفی اختصاصی صادر شود. گواهینامه بعد از پایان دوره صادر می‌شود.",
+      textEn: "Create an account to receive your Entrepreneurship Club card and referral code. The certificate is issued after you finish the course.",
     },
     {
       id: "step-2",
@@ -96,8 +96,8 @@ export const defaultEarnPlan: EarnPlan = {
     },
     {
       id: "step-4",
-      titleFa: "برداشت از کیف پول",
-      titleEn: "Use your wallet",
+      titleFa: "برداشت از طرح راحت پول دربیار",
+      titleEn: "Use the Earn Easily plan",
       textFa: "موجودی را در پروفایل ببینید و برای دوره‌ها یا تسویه استفاده کنید.",
       textEn: "Check your balance in the profile and use it for courses or payout.",
     },
@@ -139,8 +139,8 @@ export const defaultEarnPlan: EarnPlan = {
       value: 50000,
       unitFa: "تومان",
       unitEn: "Toman",
-      textFa: "واریز آنی به کیف پول بعد از ثبت‌نام موفق",
-      textEn: "Instant wallet credit after a successful signup",
+      textFa: "ثبت آنی در طرح راحت پول دربیار بعد از ثبت‌نام موفق",
+      textEn: "Recorded in the Earn Easily plan right after a successful signup",
     },
     {
       id: "perk-2",

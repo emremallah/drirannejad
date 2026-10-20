@@ -30,8 +30,14 @@ function VerifyInner() {
 
   return (
     <div className="mx-auto w-[min(640px,calc(100%-32px))] py-10">
-      <h1 className="text-3xl font-extrabold">استعلام کارت و گواهینامه</h1>
-      <p className="mt-2 text-sm text-muted">هر مدرک یک کد یکتا دارد. جعل آن بدون این کد معتبر نیست.</p>
+      <h1 className="text-3xl font-extrabold">استعلام</h1>
+      <p className="mt-2 text-sm leading-7 text-muted">
+        کارت عضویت باشگاه کارآفرینی بعد از ثبت‌نام صادر می‌شود.
+      </p>
+      <p className="mt-1 text-sm leading-7 text-muted">
+        گواهینامه جدا است و بعد از پایان دوره صادر می‌شود.
+      </p>
+      <p className="mt-1 text-sm text-muted">هر کدام کد یکتا دارد.</p>
       <form
         className="mt-5 flex flex-col gap-2 sm:flex-row"
         onSubmit={(event) => {
@@ -55,7 +61,9 @@ function VerifyInner() {
       {result ? (
         <p className={`mt-5 rounded-2xl p-4 ${result.valid ? "bg-primary-soft text-primary-ink" : "bg-accent-soft"}`}>
           {result.valid
-            ? `معتبر است — ${result.type === "card" ? "کارت عضویت" : "گواهینامه"} ${result.title} برای ${result.name}`
+            ? result.type === "card"
+              ? `معتبر است — کارت عضویت باشگاه کارآفرینی برای ${result.name}`
+              : `معتبر است — گواهینامه ${result.title} برای ${result.name}`
             : "این کد در سامانه ثبت نشده و معتبر نیست."}
         </p>
       ) : null}

@@ -22,11 +22,11 @@ function RegisterForm() {
 
   return (
     <div className="mx-auto w-[min(520px,calc(100%-32px))] py-10">
-      <h1 className="text-3xl font-extrabold">{fa ? "ثبت‌نام و صدور کارت عضویت" : "Register and get a membership card"}</h1>
-      <p className="mt-2 text-sm text-muted">
+      <h1 className="text-3xl font-extrabold">{fa ? "ثبت‌نام و صدور کارت عضویت باشگاه کارآفرینی" : "Register and get your Entrepreneurship Club card"}</h1>
+      <p className="mt-2 text-sm leading-7 text-muted">
         {fa
-          ? "بعد از ثبت‌نام، کارت رمزگذاری‌شده و کد معرفی مخصوص خودتان صادر می‌شود."
-          : "After signup you get an encrypted card and your own referral code."}
+          ? "کارت عضویت باشگاه کارآفرینی بعد از ثبت‌نام صادر می‌شود. گواهینامه جدا است و بعد از پایان دوره صادر می‌شود."
+          : "The Entrepreneurship Club card is issued after registration. The certificate is separate and is issued after you finish the course."}
       </p>
       <form
         className="mt-6 grid gap-3"

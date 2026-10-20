@@ -22,7 +22,7 @@ export default async function EarnPage({
   return (
     <div className="mx-auto w-[min(960px,calc(100%-32px))] py-10">
       <p className="text-xs font-extrabold text-accent">
-        {fa ? "کیف پول معرفی" : "Referral wallet"}
+        {fa ? "طرح راحت پول دربیار" : "Earn Easily plan"}
       </p>
       <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">{title}</h1>
       <p className="mt-3 max-w-2xl text-base leading-8 text-muted">{subtitle}</p>
@@ -104,7 +104,7 @@ export default async function EarnPage({
           {fa ? "ثبت‌نام و دریافت کد" : "Sign up and get a code"}
         </Link>
         <Link href={localePath(locale, "/account")} className="rounded-full border border-primary px-5 py-3 text-sm font-bold text-primary">
-          {fa ? "کیف پول من" : "My wallet"}
+          {fa ? "طرح راحت پول دربیار" : "Earn Easily plan"}
         </Link>
       </div>
     </div>

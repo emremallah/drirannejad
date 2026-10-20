@@ -74,8 +74,8 @@ export default function AccountPage() {
         <h1 className="text-2xl font-extrabold">{locale === "fa" ? "پروفایل کاربری" : "Your profile"}</h1>
         <p className="mt-2 text-muted">
           {locale === "fa"
-            ? "برای دیدن کیف پول، کارت و گواهینامه وارد شوید."
-            : "Sign in to see your wallet, card, and certificates."}
+            ? "برای دیدن طرح راحت پول دربیار، کارت عضویت باشگاه کارآفرینی و گواهینامه وارد شوید."
+            : "Sign in to see the Earn Easily plan, your Entrepreneurship Club card, and your certificates."}
         </p>
         <div className="mt-4 flex gap-3">
           <Link href={localePath(locale, "/login")} className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-white">
@@ -90,14 +90,17 @@ export default function AccountPage() {
   }
 
   const { user, docs, tests } = me;
+  const cards = docs.filter((doc) => doc.type === "card");
+  const certificates = docs.filter((doc) => doc.type === "certificate");
   const referralPath = localePath(locale, `/register?ref=${user.referralCode}`);
   const referralLink =
     typeof window !== "undefined" ? `${window.location.origin}${referralPath}` : referralPath;
 
   const nav = [
     { href: "#profile", label: locale === "fa" ? "پروفایل من" : "Profile" },
-    { href: "#wallet", label: locale === "fa" ? "کیف پول" : "Wallet" },
-    { href: "#docs", label: locale === "fa" ? "کارت و گواهی" : "Certificates" },
+    { href: "#earn-plan", label: locale === "fa" ? "طرح راحت پول دربیار" : "Earn Easily plan" },
+    { href: "#card", label: locale === "fa" ? "کارت عضویت باشگاه کارآفرینی" : "Entrepreneurship Club card" },
+    { href: "#certificate", label: locale === "fa" ? "گواهینامه" : "Certificate" },
     { href: "#tests", label: locale === "fa" ? "آزمون‌های من" : "My tests" },
     { href: localePath(locale, "/courses"), label: locale === "fa" ? "دروس من" : "My courses" },
     { href: localePath(locale, "/resume-builder"), label: locale === "fa" ? "رزومه‌ساز" : "Resume" },
@@ -131,15 +134,15 @@ export default function AccountPage() {
           <p className="text-sm text-muted">{user.phone}</p>
           {user.email ? <p className="text-sm text-muted">{user.email}</p> : null}
         </section>
-        <section id="wallet" className="scroll-mt-28 rounded-2xl bg-accent-soft p-5">
+        <section id="earn-plan" className="scroll-mt-28 rounded-2xl bg-accent-soft p-5">
           <p className="text-xs font-bold text-accent">
-            {locale === "fa" ? "کیف پول طرح راحت پول دربیار" : "Referral wallet"}
+            {locale === "fa" ? "طرح راحت پول دربیار" : "Earn Easily plan"}
           </p>
           <p className="mt-1 text-2xl font-extrabold">{user.wallet.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")} {locale === "fa" ? "تومان" : "Toman"}</p>
           <p className="mt-2 text-sm text-muted">
             {locale === "fa"
-              ? `هر معرفی موفق ${reward.toLocaleString("fa-IR")} تومان به کیف پول اضافه می‌کند.`
-              : `Each successful referral adds ${reward.toLocaleString("en-US")} Toman.`}
+              ? `هر معرفی موفق ${reward.toLocaleString("fa-IR")} تومان به طرح راحت پول دربیار اضافه می‌کند.`
+              : `Each successful referral adds ${reward.toLocaleString("en-US")} Toman to the Earn Easily plan.`}
           </p>
           <p className="mt-2 text-sm">
             {locale === "fa" ? "کد معرفی شما:" : "Your referral code:"} <b>{user.referralCode}</b>
@@ -171,13 +174,18 @@ export default function AccountPage() {
             </p>
           ) : null}
         </section>
-        <section id="docs" className="scroll-mt-28 rounded-2xl border border-border bg-surface p-5">
-          <h2 className="font-extrabold">{locale === "fa" ? "کارت و گواهینامه رمزگذاری‌شده" : "Encrypted card & certificates"}</h2>
-          {docs.length ? (
+        <section id="card" className="scroll-mt-28 rounded-2xl border border-border bg-surface p-5">
+          <h2 className="font-extrabold">
+            {locale === "fa" ? "کارت عضویت باشگاه کارآفرینی" : "Entrepreneurship Club membership card"}
+          </h2>
+          <p className="mt-1 text-sm text-muted">
+            {locale === "fa" ? "بعد از ثبت‌نام صادر می‌شود." : "Issued right after registration."}
+          </p>
+          {cards.length ? (
             <ul className="mt-3 grid gap-2 text-sm">
-              {docs.map((doc) => (
+              {cards.map((doc) => (
                 <li key={doc.code} className="rounded-xl bg-bg p-3">
-                  {doc.title} — <b>{doc.code}</b>
+                  {locale === "fa" ? "کارت عضویت باشگاه کارآفرینی" : "Entrepreneurship Club membership card"} — <b>{doc.code}</b>
                   <Link href={`${localePath(locale, "/verify")}?code=${doc.code}`} className="ms-2 text-primary">
                     {locale === "fa" ? "استعلام" : "Verify"}
                   </Link>
@@ -186,7 +194,31 @@ export default function AccountPage() {
             </ul>
           ) : (
             <p className="mt-3 text-sm text-muted">
-              {locale === "fa" ? "هنوز مدرکی صادر نشده است." : "No certificates yet."}
+              {locale === "fa"
+                ? "کارت عضویت باشگاه کارآفرینی هنوز صادر نشده است."
+                : "Your Entrepreneurship Club card has not been issued yet."}
+            </p>
+          )}
+        </section>
+        <section id="certificate" className="scroll-mt-28 rounded-2xl border border-border bg-surface p-5">
+          <h2 className="font-extrabold">{locale === "fa" ? "گواهینامه" : "Certificate"}</h2>
+          <p className="mt-1 text-sm text-muted">
+            {locale === "fa" ? "بعد از پایان دوره صادر می‌شود." : "Issued after you finish the course."}
+          </p>
+          {certificates.length ? (
+            <ul className="mt-3 grid gap-2 text-sm">
+              {certificates.map((doc) => (
+                <li key={doc.code} className="rounded-xl bg-bg p-3">
+                  {locale === "fa" ? "گواهینامه" : "Certificate"} — {doc.title} — <b>{doc.code}</b>
+                  <Link href={`${localePath(locale, "/verify")}?code=${doc.code}`} className="ms-2 text-primary">
+                    {locale === "fa" ? "استعلام" : "Verify"}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-3 text-sm text-muted">
+              {locale === "fa" ? "گواهینامه بعد از پایان دوره صادر می‌شود." : "Your certificate is issued after the course ends."}
             </p>
           )}
         </section>

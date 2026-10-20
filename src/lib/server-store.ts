@@ -167,7 +167,7 @@ export async function registerUser(input: {
     id: randomBytes(6).toString("hex"),
     type: "card",
     userId: user.id,
-    title: "کارت عضویت فیروزه‌ای",
+    title: "کارت عضویت باشگاه کارآفرینی",
     code: makeCode("CARD", `${user.id}:${user.phone}`),
     createdAt: user.createdAt,
   };

@@ -120,13 +120,13 @@ export function EarnAdmin({ initialPlan, users: initialUsers }: EarnAdminProps) 
     });
     const data = await response.json();
     if (!response.ok) {
-      setStatus(data.error ?? "کیف پول به‌روز نشد.");
+      setStatus(data.error ?? "طرح راحت پول دربیار به‌روز نشد.");
       return;
     }
     setUsers((current) =>
       current.map((user) => (user.id === userId ? { ...user, wallet: data.wallet } : user)),
     );
-    setStatus("کیف پول به‌روز شد.");
+    setStatus("طرح راحت پول دربیار به‌روز شد.");
   }
 
   return (
@@ -358,7 +358,7 @@ export function EarnAdmin({ initialPlan, users: initialUsers }: EarnAdminProps) 
       </div>
 
       <div className="mt-8">
-        <h3 className="font-extrabold">کیف پول کاربران</h3>
+        <h3 className="font-extrabold">طرح راحت پول دربیار کاربران</h3>
         <p className="mt-1 text-sm text-muted">موجودی هر کاربر را زیاد یا کم کنید. کمتر از صفر نمی‌شود.</p>
         <div className="mt-3 grid gap-2">
           {users.length ? (

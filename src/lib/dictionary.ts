@@ -150,7 +150,7 @@ const fa = {
       },
       {
         q: "گواهینامه دارید؟",
-        a: "دوره تربیت مدرس هوش هیجانی شامل گواهینامه است. برای بقیه دوره‌ها جزئیات را در صفحه همان دوره ببینید.",
+        a: "گواهینامه بعد از پایان دوره صادر می‌شود. کارت عضویت باشگاه کارآفرینی جدا است و بعد از ثبت‌نام داده می‌شود.",
       },
     ],
   },
@@ -352,7 +352,7 @@ const en: typeof fa = {
       },
       {
         q: "Do you issue certificates?",
-        a: "The EQ trainer course includes certificates. Check each course page for the rest.",
+        a: "The certificate is issued after you finish the course. The Entrepreneurship Club card is separate and is issued after registration.",
       },
     ],
   },

@@ -1,3 +1,4 @@
+import { zizaaStoreUrl } from "./content";
 import { localePath } from "./i18n";
 import type { Locale } from "./types";
 
@@ -19,7 +20,7 @@ function copy(locale: Locale) {
         gifts: "هدایا",
         earn: "طرح راحت پول دربیار",
         earnGroup: "درآمد",
-        store: "فروشگاه زی‌رضا",
+        store: "فروشگاه زی‌ضا",
         collaborate: "همکاری با ما",
         dispatch: "اعزام نیرو",
         instructors: "اساتید",
@@ -52,7 +53,7 @@ function copy(locale: Locale) {
         gifts: "Gifts",
         earn: "Earn Easily plan",
         earnGroup: "Earn",
-        store: "Zi-Reza store",
+        store: "Zizaa store",
         collaborate: "Work with us",
         dispatch: "Talent dispatch",
         instructors: "Instructors",
@@ -94,7 +95,7 @@ export function navGroups(locale: Locale) {
         { href: localePath(locale, "/resume-builder"), label: t.resume },
         { href: localePath(locale, "/resume-submit"), label: t.resumeSubmit },
         { href: localePath(locale, "/gifts"), label: t.gifts },
-        { href: localePath(locale, "/store"), label: t.store },
+        { href: zizaaStoreUrl, label: t.store },
       ],
     },
     {
