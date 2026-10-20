@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Great_Vibes, Vazirmatn } from "next/font/google";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -8,15 +8,16 @@ import { MobileChrome } from "@/components/MobileChrome";
 import { getDictionary } from "@/lib/dictionary";
 import { dirFor, isLocale } from "@/lib/i18n";
 
-const vazir = Vazirmatn({
-  subsets: ["arabic", "latin"],
+const vazir = localFont({
+  src: "../fonts/Vazirmatn-Bold.woff2",
+  weight: "800",
   variable: "--font-vazir",
   display: "swap",
 });
 
-const keepGoing = Great_Vibes({
+const keepGoing = localFont({
+  src: "../fonts/great-vibes-400.woff2",
   weight: "400",
-  subsets: ["latin"],
   variable: "--font-script",
   display: "swap",
 });

@@ -15,9 +15,10 @@ export function BrandLogo({ locale, compact, stacked }: BrandLogoProps) {
       <Image
         src="/brand/clinic-mark.png"
         alt=""
-        width={1562}
-        height={1200}
-        quality={100}
+        width={96}
+        height={74}
+        sizes="96px"
+        quality={90}
         priority
         className={`shrink-0 object-contain drop-shadow-sm ${compact ? "h-10 w-auto" : "h-12 w-auto md:h-[3.35rem]"}`}
       />

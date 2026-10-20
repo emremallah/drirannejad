@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CourseCard } from "@/components/CourseCard";
-import { clinicBanner, licenses, sisterSites, sloganEn, sloganFa } from "@/lib/content";
+import { clinicBanner, licenses, sisterSites, sloganEn, sloganFa, zizaaStoreUrl } from "@/lib/content";
 import { courses, featuredCourses } from "@/lib/courses";
 import { getDictionary } from "@/lib/dictionary";
 import { isLocale, localePath } from "@/lib/i18n";
@@ -42,8 +42,8 @@ export default async function HomePage({
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-7 text-muted md:text-base">
               {fa
-                ? "دوره، آزمون، مشاوره و کارت عضویت در یک مسیر. همین‌جا شروع کنید."
-                : "Courses, tests, consultation, and membership — start from here."}
+                ? "دوره، آزمون و مشاوره در یک مسیر. کارت عضویت باشگاه کارآفرینی بعد از ثبت‌نام صادر می‌شود و گواهینامه بعد از پایان دوره."
+                : "Courses, tests, and consultation in one path. The Entrepreneurship Club card is issued after registration, and the certificate after you finish the course."}
             </p>
             <p className="sr-only">{clinicBanner}</p>
             <div className="mt-6 flex flex-wrap gap-3">
@@ -54,7 +54,7 @@ export default async function HomePage({
                 {fa ? "آزمون رایگان" : "Free test"}
               </Link>
               <Link href={localePath(locale, "/register")} className="rounded-full border border-primary px-5 py-3 text-sm font-bold text-primary">
-                {fa ? "ثبت‌نام و کارت عضویت" : "Register"}
+                {fa ? "کارت عضویت باشگاه کارآفرینی" : "Entrepreneurship Club card"}
               </Link>
             </div>
           </div>
@@ -63,6 +63,8 @@ export default async function HomePage({
             alt={fa ? "هوشای، کاراکتر تجاری کلینیک" : "Hooshay, the clinic character"}
             width={420}
             height={420}
+            sizes="(max-width: 768px) 280px, 320px"
+            quality={75}
             priority
             className="mx-auto w-full max-w-[280px] rounded-full object-cover md:max-w-[320px]"
           />
@@ -97,15 +99,15 @@ export default async function HomePage({
         <section className="grid gap-3 pb-12 sm:grid-cols-2 md:grid-cols-4">
           {(
             [
-              [fa ? "آموزش رایگان" : "Free lessons", "/free"],
-              [fa ? "هدایا" : "Gifts", "/gifts"],
-              [fa ? "طرح راحت پول دربیار" : "Referral wallet", "/earn"],
-              [fa ? "فروشگاه زی‌رضا" : "Zi-Reza store", "/store"],
+              { label: fa ? "آموزش رایگان" : "Free lessons", href: localePath(locale, "/free") },
+              { label: fa ? "هدایا" : "Gifts", href: localePath(locale, "/gifts") },
+              { label: fa ? "طرح راحت پول دربیار" : "Earn Easily plan", href: localePath(locale, "/earn") },
+              { label: fa ? "فروشگاه زی‌ضا" : "Zizaa store", href: zizaaStoreUrl },
             ] as const
-          ).map(([label, href]) => (
+          ).map(({ label, href }) => (
             <Link
               key={href}
-              href={localePath(locale, href)}
+              href={href}
               className="rounded-2xl bg-primary-soft p-4 font-bold text-primary-ink hover:bg-primary hover:text-white"
             >
               {label}

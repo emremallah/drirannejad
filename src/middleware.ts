@@ -14,6 +14,10 @@ export function middleware(request: NextRequest) {
 
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname === "/" ? "" : pathname}`;
+  // Rewrite the homepage so visitors do not wait on an extra HTTPS round-trip.
+  if (pathname === "/") {
+    return NextResponse.rewrite(url);
+  }
   return NextResponse.redirect(url);
 }
 
