@@ -1,18 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Dariush";
-  src:
-    local("Dariush"),
-    local("Dariush Font"),
-    url("/fonts/Dariush.woff2") format("woff2"),
-    url("/fonts/Dariush.woff") format("woff"),
-    url("/fonts/Dariush.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   color-scheme: dark;
   --bg: #15274f;
@@ -50,7 +37,7 @@
   --color-success: var(--success);
   --color-highlight: var(--highlight);
   --color-scrim: var(--scrim);
-  --font-sans: "Dariush", var(--font-vazir);
+  --font-sans: var(--font-vazir), Tahoma, sans-serif;
 }
 
 .keep-going {
@@ -60,18 +47,40 @@
 }
 
 .brand-lockup {
-  font-family: var(--font-vazir), sans-serif;
-  text-align: justify;
-  text-align-last: justify;
-  text-justify: inter-word;
+  font-family: var(--font-vazir), Tahoma, sans-serif;
+  text-align: start;
 }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Dariush", var(--font-vazir), sans-serif;
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background-color: #15274f;
 }
+
+body {
+  min-height: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  color: var(--text);
+  font-family: var(--font-vazir), Tahoma, sans-serif;
+  background-color: #15274f;
+  background-image:
+    radial-gradient(ellipse 90% 55% at 100% -8%, rgba(61, 126, 240, 0.28), transparent 58%),
+    radial-gradient(ellipse 80% 50% at -10% 38%, rgba(36, 82, 150, 0.35), transparent 60%),
+    radial-gradient(ellipse 70% 45% at 70% 100%, rgba(13, 27, 51, 0.55), transparent 62%),
+    linear-gradient(180deg, #101c3a 0%, #15274f 32%, #1a3260 58%, #15274f 82%, #122444 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+@supports (min-height: 100dvh) {
+  body {
+    min-height: 100dvh;
+  }
+}
+
 a, button { -webkit-tap-highlight-color: transparent; }
 :focus-visible {
   outline: 2px solid var(--primary);
@@ -83,6 +92,13 @@ input, textarea, select {
 }
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+.frosted {
+  background-color: rgba(21, 39, 79, 0.62);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
 @media print {
   header, footer, nav, .no-print { display: none !important; }
   main { padding: 0 !important; }

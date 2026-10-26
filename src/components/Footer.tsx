@@ -63,7 +63,7 @@ export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
   const groups = navGroups(locale);
 
   return (
-    <footer className="mt-auto border-t border-border bg-surface pb-24 lg:pb-0">
+    <footer className="mt-auto border-t border-border pb-24 lg:pb-0">
       <div className="mx-auto hidden w-[min(1180px,calc(100%-32px))] py-10 lg:block">
         <div className="grid grid-cols-3 items-start gap-x-10 gap-y-10 xl:grid-cols-4">
           <div className="min-w-0 max-w-[260px]">

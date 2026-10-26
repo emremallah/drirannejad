@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CourseCard } from "@/components/CourseCard";
+import { HeroCopy } from "@/components/HeroCopy";
 import { clinicBanner, licenses, sisterSites, sloganEn, sloganFa, zizaaStoreUrl } from "@/lib/content";
 import { courses, featuredCourses } from "@/lib/courses";
 import { getDictionary } from "@/lib/dictionary";
@@ -20,7 +21,7 @@ export default async function HomePage({
 
   return (
     <div>
-      <section className="bg-surface px-4 py-7 text-center md:py-9">
+      <section className="px-4 py-7 text-center md:py-9">
         <h1 className="mx-auto max-w-4xl text-xl font-extrabold leading-9 md:text-3xl md:leading-12" style={{ color: "#7FD4F9" }}>
           {fa
             ? "مبدع و مبتکر اکوسیستم آموزشی نوین ارائه‌دهنده متدولوژی مبتنی بر هوش پنج‌گانه در ایران و جهان"
@@ -36,23 +37,7 @@ export default async function HomePage({
         <section className="grid items-start gap-8 py-10 md:grid-cols-[1.2fr_0.8fr]">
           <div className="min-w-0 text-justify [text-align-last:start]">
             {fa ? (
-              <div className="space-y-3 text-[15px] leading-8 text-ink md:text-base md:leading-8">
-                <h2 className="text-[15px] font-extrabold leading-8 md:text-base md:leading-8">
-                  انسانِ امروزی در یک بستر کاملاً جدید و دگرگون‌شده زندگی می‌کند که در آن تمام معناهای سنتیِ زیستن، ارتباط برقرار کردن، کار کردن و موفق شدن دچار دگرگونی شده‌اند.
-                </h2>
-                <p>
-                  سرعت تحولات به قدری بالاست که تجربه‌ی زیسته‌ی نسل‌ها با هم متفاوت شده است. مفاهیمی مثل موفقیت، ارتباط، آرامش و هویت، دیگر تعریف‌های ثابتی ندارند و مدام در حال نو شدن هستند.
-                </p>
-                <p>
-                  همان‌گونه که سیستم بدن انسان با حواس پنجگانه کار می‌کند؛ سیستم موفقیت در عصر مدرنیته هم با «هوش پنج‌گانه» کار می‌کند؛
-                </p>
-                <p>
-                  انسانِ مدرن به نوعی سازگاریِ ساختاری و چندبعدی (همان هوش‌های پنج‌گانه) نیاز دارد تا در این دنیای پر از ابهام و تحول، دچار فروپاشی روانی یا سردرگمی آموزشی نشود.
-                </p>
-                <p className="font-extrabold">
-                  آیا آماده‌ی جهش در عصر مدرن هستید؟ همین حالا مهارت‌های هوش هیجانی، هوش ارتباطی، هوش مصنوعی، هوش مالی و هوش تجاری خودت را تقویت کن.
-                </p>
-              </div>
+              <HeroCopy />
             ) : (
               <h2 className="text-3xl font-extrabold leading-snug text-ink md:text-4xl">
                 Specialized & superspecialized polyclinic of entrepreneurship and AI, Dr. Irannejad

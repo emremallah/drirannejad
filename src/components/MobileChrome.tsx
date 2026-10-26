@@ -17,7 +17,7 @@ export function MobileChrome({ locale, t }: MobileChromeProps) {
   const tabs = tabLinks(locale);
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 px-2 pb-[max(10px,env(safe-area-inset-bottom))] pt-1 backdrop-blur-md lg:hidden">
+    <nav className="frosted fixed inset-x-0 bottom-0 z-40 border-t border-border px-2 pb-[max(10px,env(safe-area-inset-bottom))] pt-1 lg:hidden">
       <ul className="grid grid-cols-4">
         {tabs.map((tab) => {
           const active = isTabActive(pathname, tab.href, tab.id);

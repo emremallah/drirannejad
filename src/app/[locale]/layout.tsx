@@ -59,9 +59,9 @@ export default async function LocaleLayout({
       lang={locale}
       dir={dirFor(locale)}
       suppressHydrationWarning
-      className={`${vazir.variable} ${keepGoing.variable} h-full antialiased`}
+      className={`${vazir.variable} ${keepGoing.variable} antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-bg text-ink">
+      <body className="flex min-h-screen flex-col text-ink">
         <Header locale={locale} t={t} />
         <main className="flex-1 pb-8 lg:pb-0">{children}</main>
         <Footer locale={locale} t={t} />

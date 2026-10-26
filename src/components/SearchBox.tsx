@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { Dictionary } from "@/lib/dictionary";
 import { localePath } from "@/lib/i18n";
@@ -22,8 +22,8 @@ export function SearchBox({
   onSubmit,
 }: SearchBoxProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [value, setValue] = useState(defaultValue ?? searchParams.get("q") ?? "");
+  const [value, setValue] = useState(defaultValue ?? "");
+  const inputId = compact ? "course-search-mobile" : "course-search";
 
   return (
     <form
@@ -39,11 +39,11 @@ export function SearchBox({
         onSubmit?.();
       }}
     >
-      <label className="sr-only" htmlFor="course-search">
+      <label className="sr-only" htmlFor={inputId}>
         {t.nav.search}
       </label>
       <input
-        id="course-search"
+        id={inputId}
         value={value}
         onChange={(event) => setValue(event.target.value)}
         placeholder={t.nav.searchPlaceholder}
