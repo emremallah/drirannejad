@@ -27,7 +27,7 @@ export default async function HomePage({
             ? "مبدع و مبتکر اکوسیستم آموزشی نوین ارائه‌دهنده متدولوژی مبتنی بر هوش پنج‌گانه در ایران و جهان"
             : "Originator and innovator of a new educational ecosystem providing a five-intelligence methodology in Iran and the world"}
         </h1>
-        <p className="mt-3 text-base font-extrabold md:text-lg" style={{ color: "#7FD4F9" }}>
+        <p className="mt-3 text-base font-extrabold text-white md:text-lg">
           {fa ? sloganFa : "From cocoon to butterfly, keep going"}
         </p>
         <p className="keep-going mt-2 text-[18px] leading-none text-white md:text-[22px]">{sloganEn}</p>

@@ -7,7 +7,7 @@ export function HeroCopy() {
 
   return (
     <div className="space-y-3 text-[15px] leading-8 text-ink md:text-base md:leading-8">
-      <h2 className="text-[15px] font-extrabold leading-8 md:text-base md:leading-8">
+      <h2 className="text-2xl font-extrabold leading-10 md:text-4xl md:leading-[1.35]">
         انسانِ امروزی در یک بستر کاملاً جدید و دگرگون‌شده زندگی می‌کند که در آن تمام معناهای سنتیِ زیستن، ارتباط برقرار کردن، کار کردن و موفق شدن دچار دگرگونی شده‌اند.
       </h2>
       {open ? (

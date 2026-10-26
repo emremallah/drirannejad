@@ -52,7 +52,7 @@ export function Header({ locale, t }: HeaderProps) {
   return (
     <>
     <header className={`frosted sticky top-0 border-b border-border ${menuOpen ? "z-[60]" : "z-30"}`}>
-      <div className="px-3 py-2 text-center leading-tight">
+      <div className="border-b border-white/25 px-3 py-2 text-center leading-tight">
         <p className="text-[12px] font-extrabold md:text-sm" style={{ color: "#7FD4F9" }}>
           {locale === "fa" ? "از پیله تا پروانه، پیوسته ادامه بده" : "From cocoon to butterfly, keep going"}
         </p>
