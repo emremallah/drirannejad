@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { sisterSites } from "@/lib/content";
+import { sisterSites, socialChannels } from "@/lib/content";
 import type { Dictionary } from "@/lib/dictionary";
 import { localePath } from "@/lib/i18n";
 import { navGroups } from "@/lib/nav";
@@ -71,6 +71,22 @@ export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
               <BrandLogo locale={locale} compact stacked />
             </Link>
             <p className="mt-3 text-sm leading-7 text-muted">{t.footer.blurb}</p>
+            <p className="mt-5 text-sm font-extrabold text-ink">
+              {locale === "fa" ? "کانال‌ها" : "Channels"}
+            </p>
+            <div className="mt-2 flex flex-col gap-2 text-sm leading-6 text-muted">
+              {socialChannels.map((channel) => (
+                <a
+                  key={channel.id}
+                  href={channel.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-fit hover:text-primary"
+                >
+                  {locale === "fa" ? channel.labelFa : channel.labelEn}
+                </a>
+              ))}
+            </div>
           </div>
           {groups.map((group) => (
             <div key={group.title} className="min-w-0">
@@ -97,7 +113,21 @@ export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
         </div>
       </div>
       <div className="mx-auto w-[min(1180px,calc(100%-32px))] py-6 lg:hidden">
-        <p className="text-sm font-extrabold">{locale === "fa" ? "سایت‌های زیرمجموعه" : "Sister sites"}</p>
+        <p className="text-sm font-extrabold">{locale === "fa" ? "کانال‌ها" : "Channels"}</p>
+        <div className="mt-3 flex flex-wrap gap-2 text-xs">
+          {socialChannels.map((channel) => (
+            <a
+              key={channel.id}
+              href={channel.href}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-bg px-3 py-1.5 font-bold text-muted hover:text-primary"
+            >
+              {locale === "fa" ? channel.labelFa : channel.labelEn}
+            </a>
+          ))}
+        </div>
+        <p className="mt-5 text-sm font-extrabold">{locale === "fa" ? "سایت‌های زیرمجموعه" : "Sister sites"}</p>
         <div className="mt-3 flex flex-wrap gap-2 text-xs">
           {sisterSites.map((site) => (
             <span key={site.name} className="rounded-full bg-bg px-3 py-1.5 font-bold text-muted">

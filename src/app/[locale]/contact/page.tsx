@@ -1,4 +1,5 @@
 import { EnrollForm } from "@/components/EnrollForm";
+import { socialChannels } from "@/lib/content";
 import { getDictionary } from "@/lib/dictionary";
 import { isLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
@@ -29,6 +30,22 @@ export default async function ContactPage({ params }: ContactPageProps) {
           <div>
             <p className="text-xs font-bold text-faint">{t.contact.address}</p>
             <p className="mt-1 max-w-sm leading-8 text-muted">{t.contact.addressValue}</p>
+          </div>
+          <div>
+            <p className="text-xs font-bold text-faint">{locale === "fa" ? "کانال‌ها" : "Channels"}</p>
+            <div className="mt-1 flex flex-col gap-1">
+              {socialChannels.map((channel) => (
+                <a
+                  key={channel.id}
+                  href={channel.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-bold text-ink hover:text-primary"
+                >
+                  {locale === "fa" ? channel.labelFa : channel.labelEn}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>

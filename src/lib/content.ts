@@ -16,6 +16,25 @@ export const licenses = [
 
 export const zizaaStoreUrl = "https://zizaa.ir/";
 
+export const socialChannels = [
+  {
+    id: "eitaa",
+    nameFa: "ایتا",
+    nameEn: "Eitaa",
+    labelFa: "کانال ایتا",
+    labelEn: "Eitaa channel",
+    href: "https://eitaa.com/ClinicDrIrannejad",
+  },
+  {
+    id: "bale",
+    nameFa: "بله",
+    nameEn: "Bale",
+    labelFa: "کانال بله",
+    labelEn: "Bale channel",
+    href: "https://ble.ir/join/N2FkNTc1YT",
+  },
+] as const;
+
 export const sisterSites: {
   name: string;
   nameEn: string;

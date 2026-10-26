@@ -27,7 +27,7 @@ export function Hooshay() {
           className="mb-3 w-[min(340px,calc(100vw-32px))] overflow-hidden rounded-3xl border border-border bg-surface shadow-lg"
         >
           <div className="flex items-center gap-3 bg-primary px-4 py-3 text-white">
-            <Image src="/brand/hooshay.jpg" alt="" width={40} height={40} sizes="40px" className="rounded-full object-cover" />
+            <Image src="/brand/hooshay.png" alt="" width={40} height={40} sizes="40px" className="rounded-full object-cover object-top" />
             <div className="min-w-0 flex-1">
               <p className="text-sm font-extrabold">هوشای</p>
               <p className="text-[11px] text-white/80">{sloganEn}</p>
@@ -80,7 +80,7 @@ export function Hooshay() {
         aria-label="گفتگو با هوشای"
         className="flex items-center gap-2 rounded-full bg-accent px-3 py-2 text-sm font-extrabold text-white shadow-md hover:brightness-110"
       >
-        <Image src="/brand/hooshay.jpg" alt="" width={28} height={28} sizes="28px" className="rounded-full object-cover" />
+        <Image src="/brand/hooshay.png" alt="" width={28} height={28} sizes="28px" className="rounded-full object-cover object-top" />
         هوشای
       </button>
     </div>

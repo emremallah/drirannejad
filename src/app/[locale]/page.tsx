@@ -33,16 +33,34 @@ export default async function HomePage({
       </section>
 
       <div className="mx-auto w-[min(1120px,calc(100%-32px))]">
-        <section className="grid items-center gap-8 py-10 md:grid-cols-[1.15fr_0.85fr]">
-          <div>
-            <h2 className="text-3xl font-extrabold leading-snug text-ink md:text-4xl">
+        <section className="grid items-start gap-8 py-10 md:grid-cols-[1.2fr_0.8fr]">
+          <div className="min-w-0 text-justify [text-align-last:start]">
+            {fa ? (
+              <div className="space-y-3 text-[15px] leading-8 text-ink md:text-base md:leading-8">
+                <h2 className="text-[15px] font-extrabold leading-8 md:text-base md:leading-8">
+                  انسانِ امروزی در یک بستر کاملاً جدید و دگرگون‌شده زندگی می‌کند که در آن تمام معناهای سنتیِ زیستن، ارتباط برقرار کردن، کار کردن و موفق شدن دچار دگرگونی شده‌اند.
+                </h2>
+                <p>
+                  سرعت تحولات به قدری بالاست که تجربه‌ی زیسته‌ی نسل‌ها با هم متفاوت شده است. مفاهیمی مثل موفقیت، ارتباط، آرامش و هویت، دیگر تعریف‌های ثابتی ندارند و مدام در حال نو شدن هستند.
+                </p>
+                <p>
+                  همان‌گونه که سیستم بدن انسان با حواس پنجگانه کار می‌کند؛ سیستم موفقیت در عصر مدرنیته هم با «هوش پنج‌گانه» کار می‌کند؛
+                </p>
+                <p>
+                  انسانِ مدرن به نوعی سازگاریِ ساختاری و چندبعدی (همان هوش‌های پنج‌گانه) نیاز دارد تا در این دنیای پر از ابهام و تحول، دچار فروپاشی روانی یا سردرگمی آموزشی نشود.
+                </p>
+                <p className="font-extrabold">
+                  آیا آماده‌ی جهش در عصر مدرن هستید؟ همین حالا مهارت‌های هوش هیجانی، هوش ارتباطی، هوش مصنوعی، هوش مالی و هوش تجاری خودت را تقویت کن.
+                </p>
+              </div>
+            ) : (
+              <h2 className="text-3xl font-extrabold leading-snug text-ink md:text-4xl">
+                Specialized & superspecialized polyclinic of entrepreneurship and AI, Dr. Irannejad
+              </h2>
+            )}
+            <p className="mt-4 text-sm leading-7 text-muted md:text-base">
               {fa
-                ? "پلی‌کلینیک تخصصی و فوق‌تخصصی کارآفرینی و هوش مصنوعی دکتر ایران‌نژاد"
-                : "Specialized & superspecialized polyclinic of entrepreneurship and AI, Dr. Irannejad"}
-            </h2>
-            <p className="mt-3 max-w-xl text-sm leading-7 text-muted md:text-base">
-              {fa
-                ? "دوره، آزمون و مشاوره در یک مسیر. کارت عضویت باشگاه کارآفرینی بعد از ثبت‌نام صادر می‌شود و گواهینامه بعد از پایان دوره."
+                ? "دوران آموزش جزیره‌ای منسوخ شده، با ما سیستماتیک و مدرن آموزش ببین و به درخشان‌ترین نسخه‌ی خودت تبدیل شو."
                 : "Courses, tests, and consultation in one path. The Entrepreneurship Club card is issued after registration, and the certificate after you finish the course."}
             </p>
             <p className="sr-only">{clinicBanner}</p>
@@ -59,14 +77,14 @@ export default async function HomePage({
             </div>
           </div>
           <Image
-            src="/brand/hooshay.jpg"
+            src="/brand/hooshay.png"
             alt={fa ? "هوشای، کاراکتر تجاری کلینیک" : "Hooshay, the clinic character"}
-            width={420}
-            height={420}
-            sizes="(max-width: 768px) 280px, 320px"
-            quality={75}
+            width={819}
+            height={819}
+            sizes="(max-width: 768px) 90vw, 480px"
+            quality={85}
             priority
-            className="mx-auto w-full max-w-[280px] rounded-full object-cover md:max-w-[320px]"
+            className="mx-auto w-full min-w-0 max-w-[360px] object-contain md:max-w-[440px]"
           />
         </section>
 
