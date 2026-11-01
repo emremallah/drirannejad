@@ -20,6 +20,11 @@ function copy(locale: Locale) {
         gifts: "هدایا",
         earn: "طرح راحت پول دربیار",
         earnGroup: "درآمد",
+        club: "باشگاه کارآفرینی",
+        clubAbout: "معرفی باشگاه",
+        accelerator: "شتابدهنده",
+        coworking: "فضای کار اشتراکی",
+        cafe: "کافه کارآفرینی",
         store: "فروشگاه زی‌ضا",
         collaborate: "همکاری با ما",
         dispatch: "اعزام نیرو",
@@ -53,6 +58,11 @@ function copy(locale: Locale) {
         gifts: "Gifts",
         earn: "Earn Easily plan",
         earnGroup: "Earn",
+        club: "Entrepreneurship Club",
+        clubAbout: "About the club",
+        accelerator: "Accelerator",
+        coworking: "Coworking space",
+        cafe: "Entrepreneurship cafe",
         store: "Zizaa store",
         collaborate: "Work with us",
         dispatch: "Talent dispatch",
@@ -72,7 +82,10 @@ function copy(locale: Locale) {
       };
 }
 
-export function navGroups(locale: Locale) {
+export type NavLink = { href: string; label: string; barLabel?: string };
+export type NavGroup = { title: string; bar?: boolean; links: NavLink[] };
+
+export function navGroups(locale: Locale): NavGroup[] {
   const t = copy(locale);
   return [
     {
@@ -87,6 +100,16 @@ export function navGroups(locale: Locale) {
     {
       title: t.earnGroup,
       links: [{ href: localePath(locale, "/earn"), label: t.earn }],
+    },
+    {
+      title: t.club,
+      bar: true,
+      links: [
+        { href: localePath(locale, "/club"), label: t.clubAbout, barLabel: t.club },
+        { href: localePath(locale, "/accelerator"), label: t.accelerator },
+        { href: localePath(locale, "/coworking"), label: t.coworking },
+        { href: localePath(locale, "/cafe"), label: t.cafe },
+      ],
     },
     {
       title: t.services,

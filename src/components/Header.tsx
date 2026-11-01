@@ -24,6 +24,8 @@ export function Header({ locale, t }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const groups = navGroups(locale);
+  const menus = groups.filter((group) => !group.bar);
+  const barLinks = groups.filter((group) => group.bar).flatMap((group) => group.links);
 
   useEffect(() => {
     setLoggedIn(Boolean(getUserId()));
@@ -63,7 +65,7 @@ export function Header({ locale, t }: HeaderProps) {
           <BrandLogo locale={locale} />
         </Link>
         <nav className="flex flex-1 items-center gap-0.5 text-[13px] font-semibold text-muted">
-          {groups.map((group) => (
+          {menus.map((group) => (
             <div key={group.title} className="group relative">
               <button
                 type="button"
@@ -122,6 +124,28 @@ export function Header({ locale, t }: HeaderProps) {
           )}
         </div>
       </div>
+      {barLinks.length > 0 ? (
+        <nav
+          aria-label={locale === "fa" ? "باشگاه کارآفرینی" : "Entrepreneurship Club"}
+          className="mx-auto hidden w-[min(1180px,calc(100%-32px))] items-center gap-1 border-t border-white/15 py-1.5 lg:flex"
+        >
+          {barLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`rounded-lg px-3 py-1.5 text-[13px] font-bold ${
+                  active ? "bg-bg text-primary" : "text-ink hover:bg-bg hover:text-primary"
+                }`}
+                aria-current={active ? "page" : undefined}
+              >
+                {link.barLabel ?? link.label}
+              </Link>
+            );
+          })}
+        </nav>
+      ) : null}
 
       <div className="mx-auto flex h-16 w-[min(1180px,calc(100%-24px))] items-center justify-between gap-2 lg:hidden">
         <div className="flex min-w-0 items-center gap-1">

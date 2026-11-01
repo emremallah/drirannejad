@@ -43,11 +43,11 @@ export default async function HomePage({
                 Specialized & superspecialized polyclinic of entrepreneurship and AI, Dr. Irannejad
               </h2>
             )}
-            <p className="mt-4 text-sm leading-7 text-muted md:text-base">
-              {fa
-                ? "دوران آموزش جزیره‌ای منسوخ شده، با ما سیستماتیک و مدرن آموزش ببین و به درخشان‌ترین نسخه‌ی خودت تبدیل شو."
-                : "Courses, tests, and consultation in one path. The Entrepreneurship Club card is issued after registration, and the certificate after you finish the course."}
-            </p>
+            {fa ? null : (
+              <p className="mt-4 text-sm leading-7 text-muted md:text-base">
+                Courses, tests, and consultation in one path. The Entrepreneurship Club card is issued after registration, and the certificate after you finish the course.
+              </p>
+            )}
             <p className="sr-only">{clinicBanner}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href={localePath(locale, "/courses")} className="rounded-full bg-primary px-5 py-3 text-sm font-bold text-white hover:bg-primary-hover">
@@ -62,14 +62,14 @@ export default async function HomePage({
             </div>
           </div>
           <Image
-            src="/brand/hooshay.png"
+            src="/brand/hero.png"
             alt={fa ? "هوشای، کاراکتر تجاری کلینیک" : "Hooshay, the clinic character"}
-            width={819}
-            height={819}
-            sizes="(max-width: 768px) 90vw, 480px"
+            width={682}
+            height={1024}
+            sizes="(max-width: 768px) 90vw, 400px"
             quality={85}
             priority
-            className="mx-auto w-full min-w-0 max-w-[360px] object-contain md:max-w-[440px]"
+            className="mx-auto w-full min-w-0 max-w-[300px] object-contain md:max-w-[380px]"
           />
         </section>
 
