@@ -28,8 +28,8 @@ export function LocaleSwitch({
       hrefLang={other}
       className={
         compact
-          ? "rounded-full border border-border px-2.5 py-1 text-[11px] font-bold text-muted"
-          : "rounded-md border border-border px-2.5 py-1.5 text-xs font-bold text-muted"
+          ? "rounded-full border border-[#7FD4F9] px-2.5 py-1 text-[11px] font-bold text-[#7FD4F9]"
+          : "rounded-md border border-[#7FD4F9] px-2.5 py-1.5 text-xs font-bold text-[#7FD4F9]"
       }
     >
       {compact ? (other === "en" ? "EN" : "فا") : other === "en" ? "English" : "فارسی"}

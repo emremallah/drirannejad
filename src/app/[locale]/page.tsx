@@ -35,18 +35,23 @@ export default async function HomePage({
 
       <div className="mx-auto w-[min(1120px,calc(100%-32px))]">
         <section className="grid items-start gap-8 py-10 md:grid-cols-[1.2fr_0.8fr]">
-          <div className="min-w-0 text-justify [text-align-last:start]">
+          <div className="min-w-0">
             {fa ? (
-              <HeroCopy />
+              <>
+                <HeroCopy />
+                <p className="mt-4 text-center text-base font-black leading-8 text-ink md:text-lg md:leading-9">
+                  دوران آموزش جزیره‌ای منسوخ شده، با ما سیستماتیک و مدرن آموزش ببین و به درخشان‌ترین نسخه‌ی خودت تبدیل شو.
+                </p>
+              </>
             ) : (
-              <h2 className="text-3xl font-extrabold leading-snug text-ink md:text-4xl">
-                Specialized & superspecialized polyclinic of entrepreneurship and AI, Dr. Irannejad
-              </h2>
-            )}
-            {fa ? null : (
-              <p className="mt-4 text-sm leading-7 text-muted md:text-base">
-                Courses, tests, and consultation in one path. The Entrepreneurship Club card is issued after registration, and the certificate after you finish the course.
-              </p>
+              <>
+                <h2 className="text-3xl font-extrabold leading-snug text-ink md:text-4xl">
+                  Specialized & superspecialized polyclinic of entrepreneurship and AI, Dr. Irannejad
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-muted md:text-base">
+                  Courses, tests, and consultation in one path. The Entrepreneurship Club card is issued after registration, and the certificate after you finish the course.
+                </p>
+              </>
             )}
             <p className="sr-only">{clinicBanner}</p>
             <div className="mt-6 flex flex-wrap gap-3">

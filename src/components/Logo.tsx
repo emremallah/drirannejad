@@ -5,6 +5,7 @@ type BrandLogoProps = {
   locale: Locale;
   compact?: boolean;
   stacked?: boolean;
+  light?: boolean;
 };
 
 function LockupLine({ text, className }: { text: string; className: string }) {
@@ -19,8 +20,10 @@ function LockupLine({ text, className }: { text: string; className: string }) {
   );
 }
 
-export function BrandLogo({ locale, compact, stacked }: BrandLogoProps) {
+export function BrandLogo({ locale, compact, stacked, light }: BrandLogoProps) {
   const fa = locale !== "en";
+  const lineClass = light ? "font-extrabold text-[#7FD4F9]" : "font-extrabold text-accent";
+  const lineClassInk = light ? "font-extrabold text-[#7FD4F9]" : "font-extrabold text-ink";
 
   return (
     <span className={`flex min-w-0 ${stacked ? "flex-col items-start gap-2" : "items-center gap-2.5"}`}>
@@ -40,11 +43,11 @@ export function BrandLogo({ locale, compact, stacked }: BrandLogoProps) {
         }`}
       >
         <LockupLine
-          className="font-extrabold text-accent"
+          className={lineClass}
           text={fa ? "پلی‌کلینیک تخصصی و فوق‌تخصصی" : "Specialized & superspecialized polyclinic"}
         />
         <LockupLine
-          className="font-extrabold text-ink"
+          className={lineClassInk}
           text={fa ? "کارآفرینی پروفسور ایران‌نژاد (AI)" : "Entrepreneurship · Prof. Irannejad (AI)"}
         />
       </span>

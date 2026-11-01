@@ -53,8 +53,8 @@ export function Header({ locale, t }: HeaderProps) {
 
   return (
     <>
-    <header className={`frosted sticky top-0 border-b border-border ${menuOpen ? "z-[60]" : "z-30"}`}>
-      <div className="border-b border-white/25 px-3 py-2 text-center leading-tight">
+    <header className={`sticky top-0 border-b border-[#d4eef8] bg-white text-[#7FD4F9] ${menuOpen ? "z-[60]" : "z-30"}`}>
+      <div className="border-b border-white/25 bg-[#15274f] px-3 py-2 text-center leading-tight">
         <p className="text-[12px] font-extrabold md:text-sm" style={{ color: "#7FD4F9" }}>
           {locale === "fa" ? "از پیله تا پروانه، پیوسته ادامه بده" : "From cocoon to butterfly, keep going"}
         </p>
@@ -62,25 +62,25 @@ export function Header({ locale, t }: HeaderProps) {
       </div>
       <div className="mx-auto hidden h-[4.75rem] w-[min(1180px,calc(100%-32px))] items-center gap-5 lg:flex">
         <Link href={localePath(locale)} className="shrink-0" aria-label={t.brand}>
-          <BrandLogo locale={locale} />
+          <BrandLogo locale={locale} light />
         </Link>
-        <nav className="flex flex-1 items-center gap-0.5 text-[13px] font-semibold text-muted">
+        <nav className="flex flex-1 items-center gap-0.5 text-[13px] font-semibold text-[#7FD4F9]">
           {menus.map((group) => (
             <div key={group.title} className="group relative">
               <button
                 type="button"
                 aria-haspopup="true"
-                className="rounded-lg px-3 py-2 hover:bg-bg hover:text-primary group-hover:bg-bg group-hover:text-primary group-focus-within:bg-bg group-focus-within:text-primary"
+                className="rounded-lg px-3 py-2 hover:bg-[#e8f7fd] hover:text-[#4eb6e8] group-hover:bg-[#e8f7fd] group-hover:text-[#4eb6e8] group-focus-within:bg-[#e8f7fd] group-focus-within:text-[#4eb6e8]"
               >
                 {group.title}
               </button>
               <div className="invisible absolute top-full start-0 z-40 min-w-48 pt-1 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                <div className="rounded-2xl border border-border bg-surface p-2 shadow-lg">
+                <div className="rounded-2xl border border-[#d4eef8] bg-white p-2 shadow-lg">
                   {group.links.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="block rounded-xl px-3 py-2 text-sm text-ink hover:bg-bg hover:text-primary"
+                      className="block rounded-xl px-3 py-2 text-sm text-[#7FD4F9] hover:bg-[#e8f7fd] hover:text-[#4eb6e8]"
                     >
                       {link.label}
                     </Link>
@@ -91,7 +91,7 @@ export function Header({ locale, t }: HeaderProps) {
           ))}
         </nav>
         <div className="w-52 shrink-0 xl:w-64">
-          <Suspense fallback={<div className="h-11 rounded-xl border border-border bg-bg" />}>
+          <Suspense fallback={<div className="h-11 rounded-xl border border-[#d4eef8] bg-[#e8f7fd]" />}>
             <SearchBox locale={locale} t={t} />
           </Suspense>
         </div>
@@ -102,7 +102,7 @@ export function Header({ locale, t }: HeaderProps) {
           {loggedIn ? (
             <Link
               href={localePath(locale, "/account")}
-              className="rounded-md bg-primary px-3.5 py-2 text-sm font-bold text-white hover:bg-primary-hover"
+              className="rounded-md bg-[#7FD4F9] px-3.5 py-2 text-sm font-bold text-white hover:bg-[#4eb6e8]"
             >
               {locale === "fa" ? "پروفایل من" : "My profile"}
             </Link>
@@ -110,13 +110,13 @@ export function Header({ locale, t }: HeaderProps) {
             <>
               <Link
                 href={localePath(locale, "/login")}
-                className="rounded-md border border-border px-3 py-2 text-sm font-bold text-ink hover:border-primary hover:text-primary"
+                className="rounded-md border border-[#7FD4F9] px-3 py-2 text-sm font-bold text-[#7FD4F9] hover:bg-[#e8f7fd]"
               >
                 {t.actions.login}
               </Link>
               <Link
                 href={localePath(locale, "/register")}
-                className="rounded-md bg-primary px-3.5 py-2 text-sm font-bold text-white hover:bg-primary-hover"
+                className="rounded-md bg-[#7FD4F9] px-3.5 py-2 text-sm font-bold text-white hover:bg-[#4eb6e8]"
               >
                 {locale === "fa" ? "ثبت‌نام" : "Register"}
               </Link>
@@ -127,7 +127,7 @@ export function Header({ locale, t }: HeaderProps) {
       {barLinks.length > 0 ? (
         <nav
           aria-label={locale === "fa" ? "باشگاه کارآفرینی" : "Entrepreneurship Club"}
-          className="mx-auto hidden w-[min(1180px,calc(100%-32px))] items-center gap-1 border-t border-white/15 py-1.5 lg:flex"
+          className="mx-auto hidden w-[min(1180px,calc(100%-32px))] items-center gap-1 border-t border-[#d4eef8] py-1.5 lg:flex"
         >
           {barLinks.map((link) => {
             const active = pathname === link.href;
@@ -136,7 +136,7 @@ export function Header({ locale, t }: HeaderProps) {
                 key={link.href}
                 href={link.href}
                 className={`rounded-lg px-3 py-1.5 text-[13px] font-bold ${
-                  active ? "bg-bg text-primary" : "text-ink hover:bg-bg hover:text-primary"
+                  active ? "bg-[#e8f7fd] text-[#4eb6e8]" : "text-[#7FD4F9] hover:bg-[#e8f7fd] hover:text-[#4eb6e8]"
                 }`}
                 aria-current={active ? "page" : undefined}
               >
@@ -156,7 +156,7 @@ export function Header({ locale, t }: HeaderProps) {
               setMenuOpen((value) => !value);
               setSearchOpen(false);
             }}
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-bg"
+            className="grid size-10 shrink-0 place-items-center rounded-full bg-[#e8f7fd] text-[#7FD4F9]"
             aria-label={t.nav.menu}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -172,7 +172,7 @@ export function Header({ locale, t }: HeaderProps) {
             )}
           </button>
           <Link href={localePath(locale)} className="min-w-0" aria-label={t.brand}>
-            <BrandLogo locale={locale} compact />
+            <BrandLogo locale={locale} compact light />
           </Link>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
@@ -185,7 +185,7 @@ export function Header({ locale, t }: HeaderProps) {
               setSearchOpen((value) => !value);
               setMenuOpen(false);
             }}
-            className="grid size-10 place-items-center rounded-full bg-bg"
+            className="grid size-10 place-items-center rounded-full bg-[#e8f7fd] text-[#7FD4F9]"
             aria-label={t.nav.search}
             aria-expanded={searchOpen}
           >
@@ -197,8 +197,8 @@ export function Header({ locale, t }: HeaderProps) {
         </div>
       </div>
       {searchOpen ? (
-        <div className="border-t border-border px-4 py-3 lg:hidden">
-          <Suspense fallback={<div className="h-11 rounded-xl border border-border bg-bg" />}>
+        <div className="border-t border-[#d4eef8] px-4 py-3 lg:hidden">
+          <Suspense fallback={<div className="h-11 rounded-xl border border-[#d4eef8] bg-[#e8f7fd]" />}>
             <SearchBox locale={locale} t={t} compact onSubmit={() => setSearchOpen(false)} />
           </Suspense>
         </div>

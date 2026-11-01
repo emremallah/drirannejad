@@ -47,7 +47,7 @@ export function SearchBox({
         value={value}
         onChange={(event) => setValue(event.target.value)}
         placeholder={t.nav.searchPlaceholder}
-        className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm outline-none focus:border-primary"
+        className="h-11 w-full rounded-xl border border-[#d4eef8] bg-[#e8f7fd] px-4 text-sm text-[#4eb6e8] outline-none placeholder:text-[#7FD4F9] focus:border-[#7FD4F9]"
       />
     </form>
   );
