@@ -1,8 +1,10 @@
-import { createHash, randomBytes, timingSafeEqual } from "crypto";
+import { createHash, randomBytes, randomInt, timingSafeEqual } from "crypto";
 import { promises as fs } from "fs";
 import path from "path";
 import { normalizeCourseRules, type CourseRules } from "./course-rules";
 import { normalizeEarnPlan, type EarnPlan } from "./earn-plan";
+import { normalizePhone, toEnglishDigits } from "./phone";
+import { sendOtpSms } from "./sms";
 import {
   MAX_RESUMES,
   defaultDesign,
@@ -72,7 +74,22 @@ export type Pledge = {
   acceptedAt: string;
 };
 
+export type OtpPurpose = "login" | "reset";
+
+export type OtpRecord = {
+  phone: string;
+  purpose: OtpPurpose;
+  codeHash: string;
+  expiresAt: number;
+  attempts: number;
+  sentAt: number;
+  /** Sends inside the current hourly window, to cap SMS spending per number. */
+  sendCount: number;
+  windowStart: number;
+};
+
 export type Store = {
+  otps: OtpRecord[];
   users: User[];
   tests: TestResult[];
   forms: FormRecord[];
@@ -85,6 +102,7 @@ export type Store = {
 };
 
 const empty: Store = {
+  otps: [],
   users: [],
   tests: [],
   forms: [],
@@ -107,6 +125,7 @@ async function readStore(): Promise<Store> {
       courseRules: normalizeCourseRules(parsed.courseRules),
       pledges: Array.isArray(parsed.pledges) ? parsed.pledges : [],
       resumes: Array.isArray(parsed.resumes) ? parsed.resumes : [],
+      otps: Array.isArray(parsed.otps) ? parsed.otps : [],
     };
   } catch {
     await fs.mkdir(path.dirname(file), { recursive: true });
@@ -154,8 +173,12 @@ export async function registerUser(input: {
   password: string;
   referredBy?: string;
 }) {
+  const phone = normalizePhone(input.phone);
+  if (!phone) throw new Error("شماره موبایل معتبر نیست. نمونه: 09121234567");
+  if (!input.name.trim()) throw new Error("نام را وارد کنید.");
+  if (input.password.length < 6) throw new Error("رمز عبور باید حداقل ۶ کاراکتر باشد.");
   const store = await readStore();
-  if (store.users.some((user) => user.phone === input.phone)) {
+  if (findUserByPhone(store, phone)) {
     throw new Error("این شماره قبلاً ثبت شده است.");
   }
   const referrer = input.referredBy
@@ -163,8 +186,8 @@ export async function registerUser(input: {
     : undefined;
   const user: User = {
     id: randomBytes(8).toString("hex"),
-    name: input.name,
-    phone: input.phone,
+    name: input.name.trim(),
+    phone,
     email: input.email,
     passwordHash: hashPassword(input.password),
     referralCode: referralCode(),
@@ -189,12 +212,119 @@ export async function registerUser(input: {
   return { user, card };
 }
 
-export async function loginUser(phone: string, password: string) {
+function findUserByPhone(store: Store, phone: string) {
+  // Older accounts may have been saved before numbers were normalized.
+  return store.users.find((item) => item.phone === phone || normalizePhone(item.phone) === phone);
+}
+
+export async function loginUser(rawPhone: string, password: string) {
+  const phone = normalizePhone(rawPhone);
   const store = await readStore();
-  const user = store.users.find((item) => item.phone === phone);
+  const user = phone ? findUserByPhone(store, phone) : undefined;
   if (!user || !safeEqual(user.passwordHash, hashPassword(password))) {
     throw new Error("شماره یا رمز عبور نادرست است.");
   }
+  return user;
+}
+
+// ---------------- one-time codes (SMS) ----------------
+
+const OTP_LENGTH = 5;
+const OTP_TTL_MS = 3 * 60_000;
+const OTP_RESEND_MS = 2 * 60_000;
+const OTP_MAX_ATTEMPTS = 5;
+const OTP_MAX_SENDS_PER_HOUR = 5;
+const HOUR_MS = 60 * 60_000;
+
+function hashOtp(phone: string, purpose: OtpPurpose, code: string) {
+  return createHash("sha256").update(`${SECRET}:otp:${purpose}:${phone}:${code}`).digest("hex");
+}
+
+/** Sends a login or password-reset code to a registered number. */
+export async function requestOtp(rawPhone: string, purpose: OtpPurpose) {
+  const phone = normalizePhone(rawPhone);
+  if (!phone) throw new Error("شماره موبایل معتبر نیست. نمونه: 09121234567");
+  const store = await readStore();
+  if (!findUserByPhone(store, phone)) {
+    throw new Error("حسابی با این شماره پیدا نشد. ابتدا ثبت‌نام کنید.");
+  }
+
+  const now = Date.now();
+  store.otps = store.otps.filter((row) => row.windowStart + HOUR_MS > now);
+  let row = store.otps.find((item) => item.phone === phone && item.purpose === purpose);
+
+  if (row) {
+    const wait = row.sentAt + OTP_RESEND_MS - now;
+    if (wait > 0) {
+      return { resendIn: Math.ceil(wait / 1000), expiresIn: Math.max(0, Math.ceil((row.expiresAt - now) / 1000)) };
+    }
+    if (row.sendCount >= OTP_MAX_SENDS_PER_HOUR) {
+      throw new Error("تعداد درخواست‌ها زیاد است. یک ساعت دیگر دوباره تلاش کنید.");
+    }
+  }
+
+  const code = String(randomInt(10 ** (OTP_LENGTH - 1), 10 ** OTP_LENGTH));
+  await sendOtpSms(phone, code);
+
+  if (!row) {
+    row = { phone, purpose, codeHash: "", expiresAt: 0, attempts: 0, sentAt: 0, sendCount: 0, windowStart: now };
+    store.otps.push(row);
+  }
+  row.codeHash = hashOtp(phone, purpose, code);
+  row.expiresAt = now + OTP_TTL_MS;
+  row.attempts = 0;
+  row.sentAt = now;
+  row.sendCount += 1;
+  await writeStore(store);
+  return { resendIn: OTP_RESEND_MS / 1000, expiresIn: OTP_TTL_MS / 1000 };
+}
+
+function consumeOtp(store: Store, phone: string, purpose: OtpPurpose, rawCode: string) {
+  const code = toCode(rawCode);
+  const row = store.otps.find((item) => item.phone === phone && item.purpose === purpose);
+  if (!row || !row.codeHash || row.expiresAt < Date.now()) {
+    throw new Error("کد منقضی شده است. دوباره درخواست کد بدهید.");
+  }
+  if (row.attempts >= OTP_MAX_ATTEMPTS) {
+    throw new Error("تعداد تلاش‌ها زیاد بود. کد جدید درخواست کنید.");
+  }
+  if (!code || !safeEqual(row.codeHash, hashOtp(phone, purpose, code))) {
+    row.attempts += 1;
+    return false;
+  }
+  // One-time: the same code can't be used again. Keep the row for rate limiting.
+  row.codeHash = "";
+  row.expiresAt = 0;
+  return true;
+}
+
+function toCode(value: string) {
+  return toEnglishDigits(String(value ?? "")).replace(/\D/g, "");
+}
+
+export async function loginWithOtp(rawPhone: string, code: string) {
+  const phone = normalizePhone(rawPhone);
+  if (!phone) throw new Error("شماره موبایل معتبر نیست.");
+  const store = await readStore();
+  const ok = consumeOtp(store, phone, "login", code);
+  await writeStore(store);
+  if (!ok) throw new Error("کد واردشده نادرست است.");
+  const user = findUserByPhone(store, phone);
+  if (!user) throw new Error("حسابی با این شماره پیدا نشد.");
+  return user;
+}
+
+export async function resetPasswordWithOtp(rawPhone: string, code: string, password: string) {
+  const phone = normalizePhone(rawPhone);
+  if (!phone) throw new Error("شماره موبایل معتبر نیست.");
+  if (password.length < 6) throw new Error("رمز عبور باید حداقل ۶ کاراکتر باشد.");
+  const store = await readStore();
+  const ok = consumeOtp(store, phone, "reset", code);
+  const user = ok ? findUserByPhone(store, phone) : undefined;
+  if (user) user.passwordHash = hashPassword(password);
+  await writeStore(store);
+  if (!ok) throw new Error("کد واردشده نادرست است.");
+  if (!user) throw new Error("حسابی با این شماره پیدا نشد.");
   return user;
 }
 
