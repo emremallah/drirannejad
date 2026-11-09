@@ -46,7 +46,10 @@ export default function LoginPage() {
             return;
           }
           setUserId(data.user.id);
-          router.push(localePath(locale, "/account"));
+          // Only same-site paths, so the login page can't be used to bounce people elsewhere.
+          const next = new URLSearchParams(window.location.search).get("next") ?? "";
+          const safeNext = next.startsWith("/") && !next.startsWith("//") && !next.includes("\\") ? next : "";
+          router.push(safeNext || localePath(locale, "/account"));
         }}
       >
         <label className="grid gap-1 text-sm font-medium">

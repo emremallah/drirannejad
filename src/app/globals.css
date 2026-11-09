@@ -102,3 +102,20 @@ input, textarea, select {
   header, footer, nav, .no-print { display: none !important; }
   main { padding: 0 !important; }
 }
+
+/* Resume builder: print only the A4 resume, edge to edge, with its colours. */
+@media print {
+  @page { size: A4; margin: 0; }
+  html:has(.resume-print-area),
+  html:has(.resume-print-area) body {
+    background: #fff !important;
+    min-height: 0 !important;
+  }
+  .resume-print-area .resume-paper {
+    width: 210mm !important;
+    min-height: 297mm;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .resume-paper section { break-inside: avoid; }
+}

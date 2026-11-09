@@ -3,6 +3,16 @@ import { promises as fs } from "fs";
 import path from "path";
 import { normalizeCourseRules, type CourseRules } from "./course-rules";
 import { normalizeEarnPlan, type EarnPlan } from "./earn-plan";
+import {
+  MAX_RESUMES,
+  defaultDesign,
+  emptyContent,
+  sanitizeContent,
+  sanitizeDesign,
+  summarize,
+  type Resume,
+  type ResumeLang,
+} from "./resume";
 
 const file = path.join(process.cwd(), "data", "store.json");
 const SECRET = process.env.CLINIC_SECRET || "irannejad-clinic-verify-2026";
@@ -71,6 +81,7 @@ export type Store = {
   earnPlan: EarnPlan;
   courseRules: CourseRules;
   pledges: Pledge[];
+  resumes: Resume[];
 };
 
 const empty: Store = {
@@ -82,6 +93,7 @@ const empty: Store = {
   earnPlan: normalizeEarnPlan(),
   courseRules: normalizeCourseRules(),
   pledges: [],
+  resumes: [],
 };
 
 async function readStore(): Promise<Store> {
@@ -94,6 +106,7 @@ async function readStore(): Promise<Store> {
       earnPlan: normalizeEarnPlan(parsed.earnPlan),
       courseRules: normalizeCourseRules(parsed.courseRules),
       pledges: Array.isArray(parsed.pledges) ? parsed.pledges : [],
+      resumes: Array.isArray(parsed.resumes) ? parsed.resumes : [],
     };
   } catch {
     await fs.mkdir(path.dirname(file), { recursive: true });
@@ -359,4 +372,98 @@ export async function attachTestToResume(testId: string) {
   if (row) row.addedToResume = true;
   await writeStore(store);
   return row;
+}
+
+// ---------------- resumes ----------------
+
+export async function listResumes(userId: string) {
+  const store = await readStore();
+  return store.resumes
+    .filter((row) => row.userId === userId)
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+    .map(summarize);
+}
+
+export async function getResume(id: string, userId: string) {
+  const store = await readStore();
+  return store.resumes.find((row) => row.id === id && row.userId === userId) ?? null;
+}
+
+export async function createResume(
+  userId: string,
+  input: { lang?: ResumeLang; title?: string; copyOf?: string; template?: unknown; color?: unknown; ifNone?: boolean },
+) {
+  const store = await readStore();
+  const user = store.users.find((item) => item.id === userId);
+  if (!user) throw new Error("ابتدا وارد حساب کاربری شوید.");
+  const owned = store.resumes.filter((row) => row.userId === userId);
+  // The first-visit "main resume" must not be created twice (two tabs, double requests).
+  if (input.ifNone && owned.length) return owned[0];
+  if (owned.length >= MAX_RESUMES) throw new Error(`حداکثر ${MAX_RESUMES} رزومه می‌توانید داشته باشید.`);
+
+  const now = new Date().toISOString();
+  const source = input.copyOf ? owned.find((row) => row.id === input.copyOf) : undefined;
+  if (input.copyOf && !source) throw new Error("رزومه پیدا نشد.");
+
+  let row: Resume;
+  if (source) {
+    const copy = structuredClone(source);
+    row = {
+      ...copy,
+      id: randomBytes(8).toString("hex"),
+      title: (input.title?.trim() || `${source.title} (${source.lang === "fa" ? "کپی" : "copy"})`).slice(0, 60),
+      createdAt: now,
+      updatedAt: now,
+    };
+  } else {
+    const lang: ResumeLang = input.lang === "en" ? "en" : "fa";
+    const content = emptyContent();
+    // Prefill from the account so the first step isn't empty.
+    content.personal.fullName = lang === "fa" ? user.name : "";
+    content.personal.phone = user.phone;
+    content.personal.email = user.email ?? "";
+    row = {
+      id: randomBytes(8).toString("hex"),
+      userId,
+      title: (input.title?.trim() || (lang === "fa" ? "رزومه فارسی" : "English resume")).slice(0, 60),
+      lang,
+      createdAt: now,
+      updatedAt: now,
+      ...sanitizeDesign({ ...defaultDesign(), template: input.template, color: input.color }),
+      ...content,
+    };
+  }
+  store.resumes.push(row);
+  await writeStore(store);
+  return row;
+}
+
+export async function updateResume(id: string, userId: string, input: Record<string, unknown>) {
+  const store = await readStore();
+  const index = store.resumes.findIndex((row) => row.id === id && row.userId === userId);
+  if (index < 0) return null;
+  const current = store.resumes[index];
+  const merged = { ...current, ...input };
+  const next: Resume = {
+    id: current.id,
+    userId: current.userId,
+    lang: current.lang,
+    createdAt: current.createdAt,
+    title: typeof input.title === "string" && input.title.trim() ? input.title.trim().slice(0, 60) : current.title,
+    updatedAt: new Date().toISOString(),
+    ...sanitizeDesign(merged),
+    ...sanitizeContent(merged),
+  };
+  store.resumes[index] = next;
+  await writeStore(store);
+  return next;
+}
+
+export async function deleteResume(id: string, userId: string) {
+  const store = await readStore();
+  const before = store.resumes.length;
+  store.resumes = store.resumes.filter((row) => !(row.id === id && row.userId === userId));
+  if (store.resumes.length === before) return false;
+  await writeStore(store);
+  return true;
 }
