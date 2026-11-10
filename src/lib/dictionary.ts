@@ -108,11 +108,17 @@ const fa = {
   contact: {
     title: "تماس و ثبت‌نام",
     lead: "برای مشاوره دوره یا همکاری، پیام بگذارید. در اولین فرصت پاسخ می‌دهیم.",
-    phone: "تلفن",
-    address: "آدرس",
-    addressValue:
-      "تهران، صادقیه، ستارخان، خیابان سازمان آب، زیر پل یادگار امام، ضلع غربی فاز یک بازارچه سنتی، ورودی شمالی",
-    phones: ["۰۲۱ ۹۱۳۲ ۲۲۹۱۸", "۰۲۱ ۹۱۴۹ ۵۰۵۱"],
+    addressLabel: "آدرس",
+    address:
+      "استان تهران. شهرستان تهران. شهر تهران. بلوار نلسون ماندلا. بن بست گل آذین . پلاک ۱۱. طبقه ۵. واحد ۱۲",
+    landlineLabel: "تلفن ثابت",
+    landline: "021_26217669",
+    mobileLabel: "موبایل",
+    mobile: "09120210680",
+    emailLabel: "ایمیل",
+    email: "Irani4046@gmail.com",
+    postalLabel: "کدپستی",
+    postal: "1915715736",
   },
   form: {
     name: "نام و نام خانوادگی",
@@ -311,11 +317,17 @@ const en: typeof fa = {
   contact: {
     title: "Contact & enrollment",
     lead: "Write for course advice or collaboration. We will get back to you shortly.",
-    phone: "Phone",
-    address: "Address",
-    addressValue:
-      "Tehran, Sadeghieh, Sattarkhan, Sazman-e Ab St., under Yadegar Imam Bridge, west side of Traditional Bazaar Phase 1, north entrance",
-    phones: ["021 9132 22918", "021 9149 5051"],
+    addressLabel: "Address",
+    address:
+      "استان تهران. شهرستان تهران. شهر تهران. بلوار نلسون ماندلا. بن بست گل آذین . پلاک ۱۱. طبقه ۵. واحد ۱۲",
+    landlineLabel: "Landline",
+    landline: "021_26217669",
+    mobileLabel: "Mobile",
+    mobile: "09120210680",
+    emailLabel: "Email",
+    email: "Irani4046@gmail.com",
+    postalLabel: "Postal code",
+    postal: "1915715736",
   },
   form: {
     name: "Full name",

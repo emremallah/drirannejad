@@ -20,16 +20,30 @@ export default async function ContactPage({ params }: ContactPageProps) {
         <p className="mt-3 max-w-md text-base leading-8 text-muted">{t.contact.lead}</p>
         <div className="mt-8 space-y-5">
           <div>
-            <p className="text-xs font-bold text-faint">{t.contact.phone}</p>
-            {t.contact.phones.map((phone) => (
-              <a key={phone} href={`tel:${phone.replace(/\s/g, "")}`} className="mt-1 block font-bold text-ink hover:text-primary">
-                {phone}
-              </a>
-            ))}
+            <p className="text-xs font-bold text-faint">{t.contact.addressLabel}</p>
+            <p className="mt-1 max-w-sm leading-8 text-ink">{t.contact.address}</p>
           </div>
           <div>
-            <p className="text-xs font-bold text-faint">{t.contact.address}</p>
-            <p className="mt-1 max-w-sm leading-8 text-muted">{t.contact.addressValue}</p>
+            <p className="text-xs font-bold text-faint">{t.contact.landlineLabel}</p>
+            <a href={`tel:${t.contact.landline.replace(/\D/g, "")}`} dir="ltr" className="mt-1 block w-fit font-bold text-ink hover:text-primary">
+              {t.contact.landline}
+            </a>
+          </div>
+          <div>
+            <p className="text-xs font-bold text-faint">{t.contact.mobileLabel}</p>
+            <a href={`tel:${t.contact.mobile}`} dir="ltr" className="mt-1 block w-fit font-bold text-ink hover:text-primary">
+              {t.contact.mobile}
+            </a>
+          </div>
+          <div>
+            <p className="text-xs font-bold text-faint">{t.contact.emailLabel}</p>
+            <a href={`mailto:${t.contact.email}`} dir="ltr" className="mt-1 block w-fit font-bold text-ink hover:text-primary">
+              {t.contact.email}
+            </a>
+          </div>
+          <div>
+            <p className="text-xs font-bold text-faint">{t.contact.postalLabel}</p>
+            <p dir="ltr" className="mt-1 w-fit font-bold text-ink">{t.contact.postal}</p>
           </div>
           <div>
             <p className="text-xs font-bold text-faint">{locale === "fa" ? "کانال‌ها" : "Channels"}</p>

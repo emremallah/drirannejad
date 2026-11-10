@@ -54,6 +54,21 @@ export async function sendOtpSms(phone: string, code: string) {
   const data = (await response.json().catch(() => null)) as { status?: string; message?: unknown } | null;
   if (!response.ok || data?.status === "error") {
     console.error("[sms] send failed", response.status, JSON.stringify(data));
-    throw new SmsError("ارسال پیامک انجام نشد. کمی بعد دوباره تلاش کنید.");
+    if (response.status === 404) {
+      throw new SmsError("الگوی پیامک هنوز در پنل فراز تأیید نشده است. بعد از تأیید، ارسال کد فعال می‌شود.");
+    }
+    throw new SmsError(providerMessage(data?.message));
   }
+}
+
+/** FarazSMS puts the reason in `message`, either as text or as field errors. */
+function providerMessage(message: unknown) {
+  if (typeof message === "string" && message.trim()) return message.trim();
+  if (message && typeof message === "object") {
+    for (const value of Object.values(message)) {
+      const text = Array.isArray(value) ? value.find((item) => typeof item === "string") : value;
+      if (typeof text === "string" && text.trim()) return text.trim();
+    }
+  }
+  return "ارسال پیامک انجام نشد. کمی بعد دوباره تلاش کنید.";
 }
